@@ -3,15 +3,9 @@
 ** support, and with no warranty, express or implied, as to its usefulness for
 ** any purpose.
 **
-** knipper.c
-**
-** Beschrijving:	Toggle even en oneven leds PORTD  
+** Beschrijving:	Opdracht B3 uit Track 1  
 ** Target:			AVR mcu
-** Build:			avr-gcc -std=c99 -Wall -O3 -mmcu=atmega128 -D F_CPU=8000000UL -c knipper.c
-**					avr-gcc -g -mmcu=atmega128 -o knipper.elf knipper.o
-**					avr-objcopy -O ihex knipper.elf knipper.hex 
-**					or type 'make'
-** Author: 			dkroeske@gmail.com
+** Author: 			rcajdane@avans.nl
 ** -------------------------------------------------------------------------*/
 
 
