@@ -1,0 +1,251 @@
+
+T1B6.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000002  00800100  0000013a  000001ae  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         0000013a  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .comment      00000030  00000000  00000000  000001b0  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000001e0  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000030  00000000  00000000  00000220  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000191  00000000  00000000  00000250  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000125  00000000  00000000  000003e1  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000001ba  00000000  00000000  00000506  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000044  00000000  00000000  000006c0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    0000019c  00000000  00000000  00000704  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    0000006a  00000000  00000000  000008a0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000020  00000000  00000000  0000090a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	45 c0       	rjmp	.+138    	; 0x8c <__ctors_end>
+   2:	00 00       	nop
+   4:	58 c0       	rjmp	.+176    	; 0xb6 <__bad_interrupt>
+   6:	00 00       	nop
+   8:	56 c0       	rjmp	.+172    	; 0xb6 <__bad_interrupt>
+   a:	00 00       	nop
+   c:	54 c0       	rjmp	.+168    	; 0xb6 <__bad_interrupt>
+   e:	00 00       	nop
+  10:	52 c0       	rjmp	.+164    	; 0xb6 <__bad_interrupt>
+  12:	00 00       	nop
+  14:	50 c0       	rjmp	.+160    	; 0xb6 <__bad_interrupt>
+  16:	00 00       	nop
+  18:	4e c0       	rjmp	.+156    	; 0xb6 <__bad_interrupt>
+  1a:	00 00       	nop
+  1c:	4c c0       	rjmp	.+152    	; 0xb6 <__bad_interrupt>
+  1e:	00 00       	nop
+  20:	4a c0       	rjmp	.+148    	; 0xb6 <__bad_interrupt>
+  22:	00 00       	nop
+  24:	48 c0       	rjmp	.+144    	; 0xb6 <__bad_interrupt>
+  26:	00 00       	nop
+  28:	46 c0       	rjmp	.+140    	; 0xb6 <__bad_interrupt>
+  2a:	00 00       	nop
+  2c:	44 c0       	rjmp	.+136    	; 0xb6 <__bad_interrupt>
+  2e:	00 00       	nop
+  30:	42 c0       	rjmp	.+132    	; 0xb6 <__bad_interrupt>
+  32:	00 00       	nop
+  34:	40 c0       	rjmp	.+128    	; 0xb6 <__bad_interrupt>
+  36:	00 00       	nop
+  38:	3e c0       	rjmp	.+124    	; 0xb6 <__bad_interrupt>
+  3a:	00 00       	nop
+  3c:	3c c0       	rjmp	.+120    	; 0xb6 <__bad_interrupt>
+  3e:	00 00       	nop
+  40:	3a c0       	rjmp	.+116    	; 0xb6 <__bad_interrupt>
+  42:	00 00       	nop
+  44:	38 c0       	rjmp	.+112    	; 0xb6 <__bad_interrupt>
+  46:	00 00       	nop
+  48:	36 c0       	rjmp	.+108    	; 0xb6 <__bad_interrupt>
+  4a:	00 00       	nop
+  4c:	34 c0       	rjmp	.+104    	; 0xb6 <__bad_interrupt>
+  4e:	00 00       	nop
+  50:	32 c0       	rjmp	.+100    	; 0xb6 <__bad_interrupt>
+  52:	00 00       	nop
+  54:	30 c0       	rjmp	.+96     	; 0xb6 <__bad_interrupt>
+  56:	00 00       	nop
+  58:	2e c0       	rjmp	.+92     	; 0xb6 <__bad_interrupt>
+  5a:	00 00       	nop
+  5c:	2c c0       	rjmp	.+88     	; 0xb6 <__bad_interrupt>
+  5e:	00 00       	nop
+  60:	2a c0       	rjmp	.+84     	; 0xb6 <__bad_interrupt>
+  62:	00 00       	nop
+  64:	28 c0       	rjmp	.+80     	; 0xb6 <__bad_interrupt>
+  66:	00 00       	nop
+  68:	26 c0       	rjmp	.+76     	; 0xb6 <__bad_interrupt>
+  6a:	00 00       	nop
+  6c:	24 c0       	rjmp	.+72     	; 0xb6 <__bad_interrupt>
+  6e:	00 00       	nop
+  70:	22 c0       	rjmp	.+68     	; 0xb6 <__bad_interrupt>
+  72:	00 00       	nop
+  74:	20 c0       	rjmp	.+64     	; 0xb6 <__bad_interrupt>
+  76:	00 00       	nop
+  78:	1e c0       	rjmp	.+60     	; 0xb6 <__bad_interrupt>
+  7a:	00 00       	nop
+  7c:	1c c0       	rjmp	.+56     	; 0xb6 <__bad_interrupt>
+  7e:	00 00       	nop
+  80:	1a c0       	rjmp	.+52     	; 0xb6 <__bad_interrupt>
+  82:	00 00       	nop
+  84:	18 c0       	rjmp	.+48     	; 0xb6 <__bad_interrupt>
+  86:	00 00       	nop
+  88:	16 c0       	rjmp	.+44     	; 0xb6 <__bad_interrupt>
+	...
+
+0000008c <__ctors_end>:
+  8c:	11 24       	eor	r1, r1
+  8e:	1f be       	out	0x3f, r1	; 63
+  90:	cf ef       	ldi	r28, 0xFF	; 255
+  92:	d0 e1       	ldi	r29, 0x10	; 16
+  94:	de bf       	out	0x3e, r29	; 62
+  96:	cd bf       	out	0x3d, r28	; 61
+
+00000098 <__do_copy_data>:
+  98:	11 e0       	ldi	r17, 0x01	; 1
+  9a:	a0 e0       	ldi	r26, 0x00	; 0
+  9c:	b1 e0       	ldi	r27, 0x01	; 1
+  9e:	ea e3       	ldi	r30, 0x3A	; 58
+  a0:	f1 e0       	ldi	r31, 0x01	; 1
+  a2:	00 e0       	ldi	r16, 0x00	; 0
+  a4:	0b bf       	out	0x3b, r16	; 59
+  a6:	02 c0       	rjmp	.+4      	; 0xac <__do_copy_data+0x14>
+  a8:	07 90       	elpm	r0, Z+
+  aa:	0d 92       	st	X+, r0
+  ac:	a2 30       	cpi	r26, 0x02	; 2
+  ae:	b1 07       	cpc	r27, r17
+  b0:	d9 f7       	brne	.-10     	; 0xa8 <__do_copy_data+0x10>
+  b2:	2b d0       	rcall	.+86     	; 0x10a <main>
+  b4:	40 c0       	rjmp	.+128    	; 0x136 <_exit>
+
+000000b6 <__bad_interrupt>:
+  b6:	a4 cf       	rjmp	.-184    	; 0x0 <__vectors>
+
+000000b8 <wait>:
+				clock value is set. This is used by _delay_ms inside
+				util/delay.h
+Version :    	DMK, Initial code
+*******************************************************************/
+{
+	for (int i=0; i<ms; i++)
+  b8:	18 16       	cp	r1, r24
+  ba:	19 06       	cpc	r1, r25
+  bc:	6c f4       	brge	.+26     	; 0xd8 <wait+0x20>
+  be:	20 e0       	ldi	r18, 0x00	; 0
+  c0:	30 e0       	ldi	r19, 0x00	; 0
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  c2:	e9 ef       	ldi	r30, 0xF9	; 249
+  c4:	f0 e0       	ldi	r31, 0x00	; 0
+  c6:	31 97       	sbiw	r30, 0x01	; 1
+  c8:	f1 f7       	brne	.-4      	; 0xc6 <wait+0xe>
+  ca:	00 c0       	rjmp	.+0      	; 0xcc <wait+0x14>
+  cc:	00 00       	nop
+  ce:	2f 5f       	subi	r18, 0xFF	; 255
+  d0:	3f 4f       	sbci	r19, 0xFF	; 255
+  d2:	28 17       	cp	r18, r24
+  d4:	39 07       	cpc	r19, r25
+  d6:	a9 f7       	brne	.-22     	; 0xc2 <wait+0xa>
+  d8:	08 95       	ret
+
+000000da <readPin>:
+}
+
+
+void readPin()
+{
+		if(PINC & 0x01)
+  da:	98 9b       	sbis	0x13, 0	; 19
+  dc:	15 c0       	rjmp	.+42     	; 0x108 <readPin+0x2e>
+		{
+			if(speed < 4000)
+  de:	80 91 00 01 	lds	r24, 0x0100
+  e2:	90 91 01 01 	lds	r25, 0x0101
+  e6:	80 3a       	cpi	r24, 0xA0	; 160
+  e8:	2f e0       	ldi	r18, 0x0F	; 15
+  ea:	92 07       	cpc	r25, r18
+  ec:	3c f4       	brge	.+14     	; 0xfc <readPin+0x22>
+			{
+				speed = speed*2;
+  ee:	88 0f       	add	r24, r24
+  f0:	99 1f       	adc	r25, r25
+  f2:	90 93 01 01 	sts	0x0101, r25
+  f6:	80 93 00 01 	sts	0x0100, r24
+  fa:	08 95       	ret
+
+			}
+			else
+			{
+				speed = 500;
+  fc:	84 ef       	ldi	r24, 0xF4	; 244
+  fe:	91 e0       	ldi	r25, 0x01	; 1
+ 100:	90 93 01 01 	sts	0x0101, r25
+ 104:	80 93 00 01 	sts	0x0100, r24
+ 108:	08 95       	ret
+
+0000010a <main>:
+notes:			Looping forever, flipping bits on PORTD
+Version :    	DMK, Initial code
+*******************************************************************/
+{
+	
+	DDRD = 0b11111111;			// All pins PORTD are set to output 
+ 10a:	8f ef       	ldi	r24, 0xFF	; 255
+ 10c:	81 bb       	out	0x11, r24	; 17
+	PORTC = 0x10;
+ 10e:	80 e1       	ldi	r24, 0x10	; 16
+ 110:	85 bb       	out	0x15, r24	; 21
+
+	while (1)
+	{
+		readPin();
+
+		PORTD = 0b10000000;
+ 112:	d0 e8       	ldi	r29, 0x80	; 128
+		PORTD = 0b01000000;
+ 114:	c0 e4       	ldi	r28, 0x40	; 64
+	DDRD = 0b11111111;			// All pins PORTD are set to output 
+	PORTC = 0x10;
+
+	while (1)
+	{
+		readPin();
+ 116:	e1 df       	rcall	.-62     	; 0xda <readPin>
+
+		PORTD = 0b10000000;
+ 118:	d2 bb       	out	0x12, r29	; 18
+		PORTD = 0b01000000;
+ 11a:	c2 bb       	out	0x12, r28	; 18
+		wait(speed);
+ 11c:	80 91 00 01 	lds	r24, 0x0100
+ 120:	90 91 01 01 	lds	r25, 0x0101
+ 124:	c9 df       	rcall	.-110    	; 0xb8 <wait>
+		PORTD = 0b01000000;
+ 126:	c2 bb       	out	0x12, r28	; 18
+		PORTD = 0b10000000;
+ 128:	d2 bb       	out	0x12, r29	; 18
+		wait(speed);
+ 12a:	80 91 00 01 	lds	r24, 0x0100
+ 12e:	90 91 01 01 	lds	r25, 0x0101
+ 132:	c2 df       	rcall	.-124    	; 0xb8 <wait>
+	}
+ 134:	f0 cf       	rjmp	.-32     	; 0x116 <main+0xc>
+
+00000136 <_exit>:
+ 136:	f8 94       	cli
+
+00000138 <__stop_program>:
+ 138:	ff cf       	rjmp	.-2      	; 0x138 <__stop_program>

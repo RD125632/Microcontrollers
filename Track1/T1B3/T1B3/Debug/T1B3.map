@@ -378,10 +378,10 @@ END GROUP
  *(.debug_frame)
  .debug_frame   0x00000000       0x34 T1B3.o
 
-.debug_str      0x00000000      0x194
+.debug_str      0x00000000      0x193
  *(.debug_str)
- .debug_str     0x00000000      0x194 T1B3.o
-                                0x1c8 (size before relaxing)
+ .debug_str     0x00000000      0x193 T1B3.o
+                                0x1c7 (size before relaxing)
 
 .debug_loc      0x00000000       0x6a
  *(.debug_loc)
