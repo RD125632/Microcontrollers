@@ -12,6 +12,7 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
+void readPin();
 
 /******************************************************************/
 void wait( int ms )
