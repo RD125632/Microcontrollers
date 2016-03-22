@@ -114,12 +114,6 @@ Disassembly of section .text:
   9c:	b1 cf       	rjmp	.-158    	; 0x0 <__vectors>
 
 0000009e <main>:
-int main(void)
-{
-    /* Replace with your application code */
-    while (1) 
-    {
-    }
   9e:	ff cf       	rjmp	.-2      	; 0x9e <main>
 
 000000a0 <_exit>:
