@@ -14,6 +14,5 @@ void twi_start(void);
 void twi_stop(void);
 void twi_tx(unsigned char data);
 void wait( int ms );
-void twi_clear(void);
 
 #endif /* LEDMATRIX_H_ */

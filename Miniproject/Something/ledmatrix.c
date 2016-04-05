@@ -7,6 +7,7 @@
 
  #include <avr/io.h>
  #include <util/delay.h>
+ #include "ledmatrix.h"
 
  void twi_init(void)
 /* 
@@ -61,26 +62,6 @@ Version :    	DMK, Initial code
 	TWDR = data;
 	TWCR = (0x80 | 0x04);
 	while( 0 == (TWCR & 0x80) );
-}
-
-void twi_clear()
-/*
-short:			clear display
-inputs:
-outputs:
-notes:
-Version :    	new code
-*******************************************************************/
-{
-	int i = 0x00;
-	for(; i <= 0x0E; i += 0x02)
-	{
-		twi_start();
-		twi_tx(0x0E);
-		twi_tx(i);
-		twi_tx(0x00);
-		twi_stop();
-	}
 }
 
 /******************************************************************/

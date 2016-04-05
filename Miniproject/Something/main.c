@@ -18,6 +18,19 @@
 #include <avr/io.h>
 #include <util/delay.h>
 #include "ledmatrix.h"
+
+void twi_clear(void)
+{
+	//for(int i = 0; i < 15; i += 2)
+	//{
+		twi_start();
+		twi_tx(0x0E);
+		twi_tx(0x02);
+		twi_tx(0b11111111);
+		twi_stop();
+	//}
+}
+
 /******************************************************************/
 int main( void )
 /* 
@@ -52,19 +65,27 @@ Version :    	DMK, Initial code
 	twi_tx(0x81);	// Display OFF - Blink On
 	twi_stop();
 
+	twi_clear();
+
 	while (1)
 	{
-		twi_clear();
-		
-		wait(500);	
-
+		//twi_start();
+		//twi_tx(0xE0);	// Display I2C addres + R/W bit
+		//twi_tx(0x02);	// Address
+		//twi_tx(0x0b00000000);	// data
+		//twi_stop();	
+//
+		//twi_start();
+		//twi_tx(0xE0);	// Display I2C addres + R/W bit
+		//twi_tx(0x00);	// Address
+		//twi_tx(0x0b00000000);	// data
+		//twi_stop();
+//
 		twi_start();
 		twi_tx(0xE0);	// Display I2C addres + R/W bit
 		twi_tx(0x00);	// Address
-		twi_tx(0x08);	// data
-		twi_stop();	
-
-		wait(500);
+		twi_tx(0b00000100);	// data
+		twi_stop();
 	}
 
 	return 1;
