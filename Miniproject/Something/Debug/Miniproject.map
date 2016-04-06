@@ -250,11 +250,11 @@ END GROUP
                 0x000000bc                twi_stop
  .text.twi_tx   0x000000c4       0x16 ledmatrix.o
                 0x000000c4                twi_tx
- .text.twi_clear
-                0x000000da       0x12 main.o
-                0x000000da                twi_clear
- .text.main     0x000000ec       0x46 main.o
-                0x000000ec                main
+ .text.twi_clear3
+                0x000000da       0x22 main.o
+                0x000000da                twi_clear3
+ .text.main     0x000000fc       0x36 main.o
+                0x000000fc                main
                 0x00000132                . = ALIGN (0x2)
  *(.fini9)
  .fini9         0x00000132        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr51\libgcc.a(_exit.o)
@@ -382,32 +382,32 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000      0x3f8
+.debug_info     0x00000000      0x3df
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x198 ledmatrix.o
- .debug_info    0x00000198      0x260 main.o
+ .debug_info    0x00000198      0x247 main.o
 
-.debug_abbrev   0x00000000      0x1c7
+.debug_abbrev   0x00000000      0x1d4
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x116 ledmatrix.o
- .debug_abbrev  0x00000116       0xb1 main.o
+ .debug_abbrev  0x00000116       0xbe main.o
 
-.debug_line     0x00000000      0x2d1
+.debug_line     0x00000000      0x31d
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x1b3 ledmatrix.o
- .debug_line    0x000001b3      0x11e main.o
+ .debug_line    0x000001b3      0x16a main.o
 
 .debug_frame    0x00000000       0x98
  *(.debug_frame)
  .debug_frame   0x00000000       0x64 ledmatrix.o
  .debug_frame   0x00000064       0x34 main.o
 
-.debug_str      0x00000000      0x1de
+.debug_str      0x00000000      0x1df
  *(.debug_str)
  .debug_str     0x00000000      0x1c3 ledmatrix.o
                                 0x1f7 (size before relaxing)
- .debug_str     0x000001c3       0x1b main.o
-                                0x1a4 (size before relaxing)
+ .debug_str     0x000001c3       0x1c main.o
+                                0x1ad (size before relaxing)
 
 .debug_loc      0x00000000       0x97
  *(.debug_loc)

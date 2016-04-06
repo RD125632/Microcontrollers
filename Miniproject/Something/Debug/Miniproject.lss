@@ -13,19 +13,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   4 .debug_aranges 00000068  00000000  00000000  000001f8  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   000003f8  00000000  00000000  00000260  2**0
+  5 .debug_info   000003df  00000000  00000000  00000260  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 000001c7  00000000  00000000  00000658  2**0
+  6 .debug_abbrev 000001d4  00000000  00000000  0000063f  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   000002d1  00000000  00000000  0000081f  2**0
+  7 .debug_line   0000031d  00000000  00000000  00000813  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000098  00000000  00000000  00000af0  2**2
+  8 .debug_frame  00000098  00000000  00000000  00000b30  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    000001de  00000000  00000000  00000b88  2**0
+  9 .debug_str    000001df  00000000  00000000  00000bc8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    00000097  00000000  00000000  00000d66  2**0
+ 10 .debug_loc    00000097  00000000  00000000  00000da7  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000048  00000000  00000000  00000dfd  2**0
+ 11 .debug_ranges 00000048  00000000  00000000  00000e3e  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -109,7 +109,7 @@ Disassembly of section .text:
   92:	d0 e1       	ldi	r29, 0x10	; 16
   94:	de bf       	out	0x3e, r29	; 62
   96:	cd bf       	out	0x3d, r28	; 61
-  98:	29 d0       	rcall	.+82     	; 0xec <main>
+  98:	31 d0       	rcall	.+98     	; 0xfc <main>
   9a:	4b c0       	rjmp	.+150    	; 0x132 <_exit>
 
 0000009c <__bad_interrupt>:
@@ -177,103 +177,104 @@ Version :    	DMK, Initial code
 }
   d8:	08 95       	ret
 
-000000da <twi_clear>:
+000000da <twi_clear3>:
 
-void twi_clear(void)
+void twi_clear3(void)
 {
 	//for(int i = 0; i < 15; i += 2)
 	//{
+		DDRB = 0xFF;
+  da:	8f ef       	ldi	r24, 0xFF	; 255
+  dc:	87 bb       	out	0x17, r24	; 23
+		PORTB = 0xAA;
+  de:	8a ea       	ldi	r24, 0xAA	; 170
+  e0:	88 bb       	out	0x18, r24	; 24
 		twi_start();
-  da:	e7 df       	rcall	.-50     	; 0xaa <twi_start>
-		twi_tx(0x0E);
-  dc:	8e e0       	ldi	r24, 0x0E	; 14
-  de:	f2 df       	rcall	.-28     	; 0xc4 <twi_tx>
-		twi_tx(0x02);
-  e0:	82 e0       	ldi	r24, 0x02	; 2
-  e2:	f0 df       	rcall	.-32     	; 0xc4 <twi_tx>
-		twi_tx(0b11111111);
-  e4:	8f ef       	ldi	r24, 0xFF	; 255
+  e2:	e3 df       	rcall	.-58     	; 0xaa <twi_start>
+		twi_tx(0xE0);	// Display I2C addres + R/W bit
+  e4:	80 ee       	ldi	r24, 0xE0	; 224
   e6:	ee df       	rcall	.-36     	; 0xc4 <twi_tx>
+		twi_tx(0x04);	// Address
+  e8:	84 e0       	ldi	r24, 0x04	; 4
+  ea:	ec df       	rcall	.-40     	; 0xc4 <twi_tx>
+		twi_tx(0xAF);	// data
+  ec:	8f ea       	ldi	r24, 0xAF	; 175
+  ee:	ea df       	rcall	.-44     	; 0xc4 <twi_tx>
+		twi_tx(0x00);	// Address
+  f0:	80 e0       	ldi	r24, 0x00	; 0
+  f2:	e8 df       	rcall	.-48     	; 0xc4 <twi_tx>
+		twi_tx(0x55);	// data
+  f4:	85 e5       	ldi	r24, 0x55	; 85
+  f6:	e6 df       	rcall	.-52     	; 0xc4 <twi_tx>
 		twi_stop();
-  e8:	e9 cf       	rjmp	.-46     	; 0xbc <twi_stop>
-  ea:	08 95       	ret
+  f8:	e1 cf       	rjmp	.-62     	; 0xbc <twi_stop>
+  fa:	08 95       	ret
 
-000000ec <main>:
+000000fc <main>:
 notes:			Looping forever, trashing the HT16K33
 Version :    	DMK, Initial code
 *******************************************************************/
 {
 	
 	twi_init();		// Init TWI interface
-  ec:	d8 df       	rcall	.-80     	; 0x9e <twi_init>
+  fc:	d0 df       	rcall	.-96     	; 0x9e <twi_init>
 
 	// Init HT16K22. Page 32 datasheet
 	twi_start();
-  ee:	dd df       	rcall	.-70     	; 0xaa <twi_start>
+  fe:	d5 df       	rcall	.-86     	; 0xaa <twi_start>
 	twi_tx(0xE0);	// Display I2C addres + R/W bit
-  f0:	80 ee       	ldi	r24, 0xE0	; 224
-  f2:	e8 df       	rcall	.-48     	; 0xc4 <twi_tx>
-	twi_tx(0x21);	// Internal osc on (page 10 HT16K33)
-  f4:	81 e2       	ldi	r24, 0x21	; 33
-  f6:	e6 df       	rcall	.-52     	; 0xc4 <twi_tx>
-	twi_stop();
-  f8:	e1 df       	rcall	.-62     	; 0xbc <twi_stop>
-
-	twi_start();
-  fa:	d7 df       	rcall	.-82     	; 0xaa <twi_start>
-	twi_tx(0xE0);	// Display I2C address + R/W bit
-  fc:	80 ee       	ldi	r24, 0xE0	; 224
-  fe:	e2 df       	rcall	.-60     	; 0xc4 <twi_tx>
-	twi_tx(0xA0);	// HT16K33 pins all output
- 100:	80 ea       	ldi	r24, 0xA0	; 160
+ 100:	80 ee       	ldi	r24, 0xE0	; 224
  102:	e0 df       	rcall	.-64     	; 0xc4 <twi_tx>
+	twi_tx(0x21);	// Internal osc on (page 10 HT16K33)
+ 104:	81 e2       	ldi	r24, 0x21	; 33
+ 106:	de df       	rcall	.-68     	; 0xc4 <twi_tx>
 	twi_stop();
- 104:	db df       	rcall	.-74     	; 0xbc <twi_stop>
+ 108:	d9 df       	rcall	.-78     	; 0xbc <twi_stop>
 
 	twi_start();
- 106:	d1 df       	rcall	.-94     	; 0xaa <twi_start>
+ 10a:	cf df       	rcall	.-98     	; 0xaa <twi_start>
 	twi_tx(0xE0);	// Display I2C address + R/W bit
- 108:	80 ee       	ldi	r24, 0xE0	; 224
- 10a:	dc df       	rcall	.-72     	; 0xc4 <twi_tx>
-	twi_tx(0xE3);	// Display Dimming 4/16 duty cycle
- 10c:	83 ee       	ldi	r24, 0xE3	; 227
+ 10c:	80 ee       	ldi	r24, 0xE0	; 224
  10e:	da df       	rcall	.-76     	; 0xc4 <twi_tx>
+	twi_tx(0xA0);	// HT16K33 pins all output
+ 110:	80 ea       	ldi	r24, 0xA0	; 160
+ 112:	d8 df       	rcall	.-80     	; 0xc4 <twi_tx>
 	twi_stop();
- 110:	d5 df       	rcall	.-86     	; 0xbc <twi_stop>
+ 114:	d3 df       	rcall	.-90     	; 0xbc <twi_stop>
 
 	twi_start();
- 112:	cb df       	rcall	.-106    	; 0xaa <twi_start>
+ 116:	c9 df       	rcall	.-110    	; 0xaa <twi_start>
 	twi_tx(0xE0);	// Display I2C address + R/W bit
- 114:	80 ee       	ldi	r24, 0xE0	; 224
- 116:	d6 df       	rcall	.-84     	; 0xc4 <twi_tx>
-	twi_tx(0x81);	// Display OFF - Blink On
- 118:	81 e8       	ldi	r24, 0x81	; 129
+ 118:	80 ee       	ldi	r24, 0xE0	; 224
  11a:	d4 df       	rcall	.-88     	; 0xc4 <twi_tx>
+	twi_tx(0xE3);	// Display Dimming 4/16 duty cycle
+ 11c:	83 ee       	ldi	r24, 0xE3	; 227
+ 11e:	d2 df       	rcall	.-92     	; 0xc4 <twi_tx>
 	twi_stop();
- 11c:	cf df       	rcall	.-98     	; 0xbc <twi_stop>
+ 120:	cd df       	rcall	.-102    	; 0xbc <twi_stop>
 
-	twi_clear();
- 11e:	dd df       	rcall	.-70     	; 0xda <twi_clear>
-		//twi_tx(0xE0);	// Display I2C addres + R/W bit
-		//twi_tx(0x00);	// Address
+	twi_start();
+ 122:	c3 df       	rcall	.-122    	; 0xaa <twi_start>
+	twi_tx(0xE0);	// Display I2C address + R/W bit
+ 124:	80 ee       	ldi	r24, 0xE0	; 224
+ 126:	ce df       	rcall	.-100    	; 0xc4 <twi_tx>
+	twi_tx(0x81);	// Display OFF - Blink On
+ 128:	81 e8       	ldi	r24, 0x81	; 129
+ 12a:	cc df       	rcall	.-104    	; 0xc4 <twi_tx>
+	twi_stop();
+ 12c:	c7 df       	rcall	.-114    	; 0xbc <twi_stop>
+
+	while (1)
+	{
+		twi_clear3();
+ 12e:	d5 df       	rcall	.-86     	; 0xda <twi_clear3>
 		//twi_tx(0x0b00000000);	// data
 		//twi_stop();
 //
-		twi_start();
- 120:	c4 df       	rcall	.-120    	; 0xaa <twi_start>
-		twi_tx(0xE0);	// Display I2C addres + R/W bit
- 122:	80 ee       	ldi	r24, 0xE0	; 224
- 124:	cf df       	rcall	.-98     	; 0xc4 <twi_tx>
-		twi_tx(0x00);	// Address
- 126:	80 e0       	ldi	r24, 0x00	; 0
- 128:	cd df       	rcall	.-102    	; 0xc4 <twi_tx>
-		twi_tx(0b00000100);	// data
- 12a:	84 e0       	ldi	r24, 0x04	; 4
- 12c:	cb df       	rcall	.-106    	; 0xc4 <twi_tx>
-		twi_stop();
- 12e:	c6 df       	rcall	.-116    	; 0xbc <twi_stop>
+		
+		
 	}
- 130:	f7 cf       	rjmp	.-18     	; 0x120 <main+0x34>
+ 130:	fe cf       	rjmp	.-4      	; 0x12e <main+0x32>
 
 00000132 <_exit>:
  132:	f8 94       	cli

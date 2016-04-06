@@ -13,20 +13,24 @@
 **					or type 'make'
 ** Author: 			dkroeske@gmail.com
 ** -------------------------------------------------------------------------*/
-
+# define F_CPU 8000000UL
 
 #include <avr/io.h>
 #include <util/delay.h>
 #include "ledmatrix.h"
 
-void twi_clear(void)
+void twi_clear3(void)
 {
 	//for(int i = 0; i < 15; i += 2)
 	//{
+		DDRB = 0xFF;
+		PORTB = 0xAA;
 		twi_start();
-		twi_tx(0x0E);
-		twi_tx(0x02);
-		twi_tx(0b11111111);
+		twi_tx(0xE0);	// Display I2C addres + R/W bit
+		twi_tx(0x04);	// Address
+		twi_tx(0xAF);	// data
+		twi_tx(0x00);	// Address
+		twi_tx(0x55);	// data
 		twi_stop();
 	//}
 }
@@ -65,10 +69,9 @@ Version :    	DMK, Initial code
 	twi_tx(0x81);	// Display OFF - Blink On
 	twi_stop();
 
-	twi_clear();
-
 	while (1)
 	{
+		twi_clear3();
 		//twi_start();
 		//twi_tx(0xE0);	// Display I2C addres + R/W bit
 		//twi_tx(0x02);	// Address
@@ -81,11 +84,8 @@ Version :    	DMK, Initial code
 		//twi_tx(0x0b00000000);	// data
 		//twi_stop();
 //
-		twi_start();
-		twi_tx(0xE0);	// Display I2C addres + R/W bit
-		twi_tx(0x00);	// Address
-		twi_tx(0b00000100);	// data
-		twi_stop();
+		
+		
 	}
 
 	return 1;
