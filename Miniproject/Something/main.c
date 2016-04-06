@@ -15,6 +15,7 @@
 ** -------------------------------------------------------------------------*/
 # define F_CPU 8000000UL
 
+#include <stdio.h>
 #include <avr/io.h>
 #include <util/delay.h>
 #include "ledmatrix.h"
@@ -26,6 +27,10 @@ typedef struct {
 
 PATTERN_STRUCT pattern[] = {
 	{0x00, 0b00011110}, {0x02, 0b00100001}, {0x04, 0b11010100}, {0x06, 0b11000010}, {0x08, 0b11000010}, {0x0A, 0b11010100}, {0x0C, 0b00100001}, {0x0E, 0b00011110}
+};
+
+PATTERN_STRUCT pattern2[] = {
+	{0x00, 0b00011110}, {0x02, 0b00100001}, {0x04, 0b11010010}, {0x06, 0b11000100}, {0x08, 0b11000100}, {0x0A, 0b11010010}, {0x0C, 0b00100001}, {0x0E, 0b00011110}
 };
 
 void twi_data(void)
@@ -41,6 +46,18 @@ void twi_data(void)
 	twi_stop();
 }
 
+void twi_data2(void)
+{
+	twi_start();
+	twi_tx(0xE0);
+	for (int i = 0; i < 8; i++)
+	{
+		twi_tx(pattern2[i].address);
+		twi_tx(pattern2[i].data);
+		
+	}
+	twi_stop();
+}
 
 
 /******************************************************************/
@@ -53,7 +70,6 @@ notes:			Looping forever, trashing the HT16K33
 Version :    	DMK, Initial code
 *******************************************************************/
 {
-	
 	twi_init();		// Init TWI interface
 
 	twi_start();
@@ -64,25 +80,20 @@ Version :    	DMK, Initial code
 		twi_tx(0x00);
 	}
 	twi_stop();
-	twi_data();
+	DDRA = 0x00;
 
 	while (1)
 	{
 		wait(500);
-		
-		//twi_start();
-		//twi_tx(0xE0);	// Display I2C addres + R/W bit
-		//twi_tx(0x02);	// Address
-		//twi_tx(0x0b00000000);	// data
-		//twi_stop();	
-//
-		//twi_start();
-		//twi_tx(0xE0);	// Display I2C addres + R/W bit
-		//twi_tx(0x00);	// Address
-		//twi_tx(0x0b00000000);	// data
-		//twi_stop();
-//
-		//wait(500);
+		printf("test");
+		if(PINA & 0x01)
+		{
+			twi_data2();
+		}
+		else
+		{
+			twi_data();
+		}
 	}
 
 	return 1;
