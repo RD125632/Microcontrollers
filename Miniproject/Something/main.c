@@ -23,14 +23,24 @@ void twi_clear3(void)
 {
 	//for(int i = 0; i < 15; i += 2)
 	//{
-		DDRB = 0xFF;
-		PORTB = 0xAA;
 		twi_start();
 		twi_tx(0xE0);	// Display I2C addres + R/W bit
-		twi_tx(0x04);	// Address
-		twi_tx(0xAF);	// data
 		twi_tx(0x00);	// Address
+		twi_tx(0xAF);	// data
+		twi_tx(0x00);	
 		twi_tx(0x55);	// data
+		twi_tx(0x00);
+		twi_tx(0x77);	// data
+		twi_tx(0x00);
+		twi_tx(0x44);	// data
+		twi_tx(0x00);
+		twi_tx(0x22);	// data
+		twi_tx(0x00);
+		twi_tx(0x22);	// data
+		twi_tx(0x00);
+		twi_tx(0x22);	// data
+		twi_tx(0x00);
+		twi_tx(0x22);	// data
 		twi_stop();
 	//}
 }
@@ -84,8 +94,15 @@ Version :    	DMK, Initial code
 		//twi_tx(0x0b00000000);	// data
 		//twi_stop();
 //
-		
-		
+		twi_start();
+		twi_tx(0xE0);
+		twi_tx(0x00);
+		for(int i = 0; i < 16; i++)
+		{
+			twi_tx(0x00);
+		}
+		twi_stop();
+		//wait(500);
 	}
 
 	return 1;
