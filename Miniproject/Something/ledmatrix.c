@@ -20,6 +20,27 @@ Version :    	DMK, Initial code
 {
 	TWSR = 0;
 	TWBR = 32;	 // TWI clock set to 100kHz, prescaler = 0
+
+	// Init HT16K22. Page 32 datasheet
+	twi_start();
+	twi_tx(0xE0);	// Display I2C addres + R/W bit
+	twi_tx(0x21);	// Internal osc on (page 10 HT16K33)
+	twi_stop();
+
+	twi_start();
+	twi_tx(0xE0);	// Display I2C address + R/W bit
+	twi_tx(0xA0);	// HT16K33 pins all output
+	twi_stop();
+
+	twi_start();
+	twi_tx(0xE0);	// Display I2C address + R/W bit
+	twi_tx(0xE3);	// Display Dimming 4/16 duty cycle
+	twi_stop();
+
+	twi_start();
+	twi_tx(0xE0);	// Display I2C address + R/W bit
+	twi_tx(0x81);	// Display OFF - Blink On
+	twi_stop();
 }
 
 /******************************************************************/

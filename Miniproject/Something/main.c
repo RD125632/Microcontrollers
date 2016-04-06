@@ -19,31 +19,29 @@
 #include <util/delay.h>
 #include "ledmatrix.h"
 
-void twi_clear3(void)
+typedef struct {
+	unsigned char address;
+	unsigned char data ;
+} PATTERN_STRUCT;
+
+PATTERN_STRUCT pattern[] = {
+	{0x00, 0b00011110}, {0x02, 0b00100001}, {0x04, 0b11010100}, {0x06, 0b11000010}, {0x08, 0b11000010}, {0x0A, 0b11010100}, {0x0C, 0b00100001}, {0x0E, 0b00011110}
+};
+
+void twi_data(void)
 {
-	//for(int i = 0; i < 15; i += 2)
-	//{
-		twi_start();
-		twi_tx(0xE0);	// Display I2C addres + R/W bit
-		twi_tx(0x00);	// Address
-		twi_tx(0xAF);	// data
-		twi_tx(0x00);	
-		twi_tx(0x55);	// data
-		twi_tx(0x00);
-		twi_tx(0x77);	// data
-		twi_tx(0x00);
-		twi_tx(0x44);	// data
-		twi_tx(0x00);
-		twi_tx(0x22);	// data
-		twi_tx(0x00);
-		twi_tx(0x22);	// data
-		twi_tx(0x00);
-		twi_tx(0x22);	// data
-		twi_tx(0x00);
-		twi_tx(0x22);	// data
-		twi_stop();
-	//}
+	twi_start();
+	twi_tx(0xE0);
+	for (int i = 0; i < 8; i++)
+	{
+		twi_tx(pattern[i].address);
+		twi_tx(pattern[i].data);
+		
+	}
+	twi_stop();
 }
+
+
 
 /******************************************************************/
 int main( void )
@@ -58,30 +56,20 @@ Version :    	DMK, Initial code
 	
 	twi_init();		// Init TWI interface
 
-	// Init HT16K22. Page 32 datasheet
 	twi_start();
-	twi_tx(0xE0);	// Display I2C addres + R/W bit
-	twi_tx(0x21);	// Internal osc on (page 10 HT16K33)
+	twi_tx(0xE0);
+	twi_tx(0x00);
+	for(int i = 0; i < 16; i++)
+	{
+		twi_tx(0x00);
+	}
 	twi_stop();
-
-	twi_start();
-	twi_tx(0xE0);	// Display I2C address + R/W bit
-	twi_tx(0xA0);	// HT16K33 pins all output
-	twi_stop();
-
-	twi_start();
-	twi_tx(0xE0);	// Display I2C address + R/W bit
-	twi_tx(0xE3);	// Display Dimming 4/16 duty cycle
-	twi_stop();
-
-	twi_start();
-	twi_tx(0xE0);	// Display I2C address + R/W bit
-	twi_tx(0x81);	// Display OFF - Blink On
-	twi_stop();
+	twi_data();
 
 	while (1)
 	{
-		twi_clear3();
+		wait(500);
+		
 		//twi_start();
 		//twi_tx(0xE0);	// Display I2C addres + R/W bit
 		//twi_tx(0x02);	// Address
@@ -94,14 +82,6 @@ Version :    	DMK, Initial code
 		//twi_tx(0x0b00000000);	// data
 		//twi_stop();
 //
-		twi_start();
-		twi_tx(0xE0);
-		twi_tx(0x00);
-		for(int i = 0; i < 16; i++)
-		{
-			twi_tx(0x00);
-		}
-		twi_stop();
 		//wait(500);
 	}
 

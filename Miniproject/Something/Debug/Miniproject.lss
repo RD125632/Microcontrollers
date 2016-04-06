@@ -3,29 +3,29 @@ Miniproject.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000000  00800100  00800100  000001ce  2**0
+  0 .data         00000010  00800100  000001b6  0000022a  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         0000017a  00000000  00000000  00000054  2**1
+  1 .text         000001b6  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .comment      00000030  00000000  00000000  000001ce  2**0
+  2 .comment      00000030  00000000  00000000  0000023a  2**0
                   CONTENTS, READONLY
-  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000200  2**2
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  0000026c  2**2
                   CONTENTS, READONLY
-  4 .debug_aranges 00000068  00000000  00000000  0000023c  2**0
+  4 .debug_aranges 00000068  00000000  00000000  000002a8  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   00000523  00000000  00000000  000002a4  2**0
+  5 .debug_info   000004b4  00000000  00000000  00000310  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 000001ec  00000000  00000000  000007c7  2**0
+  6 .debug_abbrev 000002b1  00000000  00000000  000007c4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   00000321  00000000  00000000  000009b3  2**0
+  7 .debug_line   000002f3  00000000  00000000  00000a75  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000098  00000000  00000000  00000cd4  2**2
+  8 .debug_frame  000000bc  00000000  00000000  00000d68  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    000001df  00000000  00000000  00000d6c  2**0
+  9 .debug_str    00000200  00000000  00000000  00000e24  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    000000d8  00000000  00000000  00000f4b  2**0
+ 10 .debug_loc    00000171  00000000  00000000  00001024  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000048  00000000  00000000  00001023  2**0
+ 11 .debug_ranges 00000048  00000000  00000000  00001195  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -33,73 +33,73 @@ Disassembly of section .text:
 00000000 <__vectors>:
    0:	45 c0       	rjmp	.+138    	; 0x8c <__ctors_end>
    2:	00 00       	nop
-   4:	4b c0       	rjmp	.+150    	; 0x9c <__bad_interrupt>
+   4:	58 c0       	rjmp	.+176    	; 0xb6 <__bad_interrupt>
    6:	00 00       	nop
-   8:	49 c0       	rjmp	.+146    	; 0x9c <__bad_interrupt>
+   8:	56 c0       	rjmp	.+172    	; 0xb6 <__bad_interrupt>
    a:	00 00       	nop
-   c:	47 c0       	rjmp	.+142    	; 0x9c <__bad_interrupt>
+   c:	54 c0       	rjmp	.+168    	; 0xb6 <__bad_interrupt>
    e:	00 00       	nop
-  10:	45 c0       	rjmp	.+138    	; 0x9c <__bad_interrupt>
+  10:	52 c0       	rjmp	.+164    	; 0xb6 <__bad_interrupt>
   12:	00 00       	nop
-  14:	43 c0       	rjmp	.+134    	; 0x9c <__bad_interrupt>
+  14:	50 c0       	rjmp	.+160    	; 0xb6 <__bad_interrupt>
   16:	00 00       	nop
-  18:	41 c0       	rjmp	.+130    	; 0x9c <__bad_interrupt>
+  18:	4e c0       	rjmp	.+156    	; 0xb6 <__bad_interrupt>
   1a:	00 00       	nop
-  1c:	3f c0       	rjmp	.+126    	; 0x9c <__bad_interrupt>
+  1c:	4c c0       	rjmp	.+152    	; 0xb6 <__bad_interrupt>
   1e:	00 00       	nop
-  20:	3d c0       	rjmp	.+122    	; 0x9c <__bad_interrupt>
+  20:	4a c0       	rjmp	.+148    	; 0xb6 <__bad_interrupt>
   22:	00 00       	nop
-  24:	3b c0       	rjmp	.+118    	; 0x9c <__bad_interrupt>
+  24:	48 c0       	rjmp	.+144    	; 0xb6 <__bad_interrupt>
   26:	00 00       	nop
-  28:	39 c0       	rjmp	.+114    	; 0x9c <__bad_interrupt>
+  28:	46 c0       	rjmp	.+140    	; 0xb6 <__bad_interrupt>
   2a:	00 00       	nop
-  2c:	37 c0       	rjmp	.+110    	; 0x9c <__bad_interrupt>
+  2c:	44 c0       	rjmp	.+136    	; 0xb6 <__bad_interrupt>
   2e:	00 00       	nop
-  30:	35 c0       	rjmp	.+106    	; 0x9c <__bad_interrupt>
+  30:	42 c0       	rjmp	.+132    	; 0xb6 <__bad_interrupt>
   32:	00 00       	nop
-  34:	33 c0       	rjmp	.+102    	; 0x9c <__bad_interrupt>
+  34:	40 c0       	rjmp	.+128    	; 0xb6 <__bad_interrupt>
   36:	00 00       	nop
-  38:	31 c0       	rjmp	.+98     	; 0x9c <__bad_interrupt>
+  38:	3e c0       	rjmp	.+124    	; 0xb6 <__bad_interrupt>
   3a:	00 00       	nop
-  3c:	2f c0       	rjmp	.+94     	; 0x9c <__bad_interrupt>
+  3c:	3c c0       	rjmp	.+120    	; 0xb6 <__bad_interrupt>
   3e:	00 00       	nop
-  40:	2d c0       	rjmp	.+90     	; 0x9c <__bad_interrupt>
+  40:	3a c0       	rjmp	.+116    	; 0xb6 <__bad_interrupt>
   42:	00 00       	nop
-  44:	2b c0       	rjmp	.+86     	; 0x9c <__bad_interrupt>
+  44:	38 c0       	rjmp	.+112    	; 0xb6 <__bad_interrupt>
   46:	00 00       	nop
-  48:	29 c0       	rjmp	.+82     	; 0x9c <__bad_interrupt>
+  48:	36 c0       	rjmp	.+108    	; 0xb6 <__bad_interrupt>
   4a:	00 00       	nop
-  4c:	27 c0       	rjmp	.+78     	; 0x9c <__bad_interrupt>
+  4c:	34 c0       	rjmp	.+104    	; 0xb6 <__bad_interrupt>
   4e:	00 00       	nop
-  50:	25 c0       	rjmp	.+74     	; 0x9c <__bad_interrupt>
+  50:	32 c0       	rjmp	.+100    	; 0xb6 <__bad_interrupt>
   52:	00 00       	nop
-  54:	23 c0       	rjmp	.+70     	; 0x9c <__bad_interrupt>
+  54:	30 c0       	rjmp	.+96     	; 0xb6 <__bad_interrupt>
   56:	00 00       	nop
-  58:	21 c0       	rjmp	.+66     	; 0x9c <__bad_interrupt>
+  58:	2e c0       	rjmp	.+92     	; 0xb6 <__bad_interrupt>
   5a:	00 00       	nop
-  5c:	1f c0       	rjmp	.+62     	; 0x9c <__bad_interrupt>
+  5c:	2c c0       	rjmp	.+88     	; 0xb6 <__bad_interrupt>
   5e:	00 00       	nop
-  60:	1d c0       	rjmp	.+58     	; 0x9c <__bad_interrupt>
+  60:	2a c0       	rjmp	.+84     	; 0xb6 <__bad_interrupt>
   62:	00 00       	nop
-  64:	1b c0       	rjmp	.+54     	; 0x9c <__bad_interrupt>
+  64:	28 c0       	rjmp	.+80     	; 0xb6 <__bad_interrupt>
   66:	00 00       	nop
-  68:	19 c0       	rjmp	.+50     	; 0x9c <__bad_interrupt>
+  68:	26 c0       	rjmp	.+76     	; 0xb6 <__bad_interrupt>
   6a:	00 00       	nop
-  6c:	17 c0       	rjmp	.+46     	; 0x9c <__bad_interrupt>
+  6c:	24 c0       	rjmp	.+72     	; 0xb6 <__bad_interrupt>
   6e:	00 00       	nop
-  70:	15 c0       	rjmp	.+42     	; 0x9c <__bad_interrupt>
+  70:	22 c0       	rjmp	.+68     	; 0xb6 <__bad_interrupt>
   72:	00 00       	nop
-  74:	13 c0       	rjmp	.+38     	; 0x9c <__bad_interrupt>
+  74:	20 c0       	rjmp	.+64     	; 0xb6 <__bad_interrupt>
   76:	00 00       	nop
-  78:	11 c0       	rjmp	.+34     	; 0x9c <__bad_interrupt>
+  78:	1e c0       	rjmp	.+60     	; 0xb6 <__bad_interrupt>
   7a:	00 00       	nop
-  7c:	0f c0       	rjmp	.+30     	; 0x9c <__bad_interrupt>
+  7c:	1c c0       	rjmp	.+56     	; 0xb6 <__bad_interrupt>
   7e:	00 00       	nop
-  80:	0d c0       	rjmp	.+26     	; 0x9c <__bad_interrupt>
+  80:	1a c0       	rjmp	.+52     	; 0xb6 <__bad_interrupt>
   82:	00 00       	nop
-  84:	0b c0       	rjmp	.+22     	; 0x9c <__bad_interrupt>
+  84:	18 c0       	rjmp	.+48     	; 0xb6 <__bad_interrupt>
   86:	00 00       	nop
-  88:	09 c0       	rjmp	.+18     	; 0x9c <__bad_interrupt>
+  88:	16 c0       	rjmp	.+44     	; 0xb6 <__bad_interrupt>
 	...
 
 0000008c <__ctors_end>:
@@ -109,244 +109,323 @@ Disassembly of section .text:
   92:	d0 e1       	ldi	r29, 0x10	; 16
   94:	de bf       	out	0x3e, r29	; 62
   96:	cd bf       	out	0x3d, r28	; 61
-  98:	45 d0       	rcall	.+138    	; 0x124 <main>
-  9a:	6d c0       	rjmp	.+218    	; 0x176 <_exit>
 
-0000009c <__bad_interrupt>:
-  9c:	b1 cf       	rjmp	.-158    	; 0x0 <__vectors>
+00000098 <__do_copy_data>:
+  98:	11 e0       	ldi	r17, 0x01	; 1
+  9a:	a0 e0       	ldi	r26, 0x00	; 0
+  9c:	b1 e0       	ldi	r27, 0x01	; 1
+  9e:	e6 eb       	ldi	r30, 0xB6	; 182
+  a0:	f1 e0       	ldi	r31, 0x01	; 1
+  a2:	00 e0       	ldi	r16, 0x00	; 0
+  a4:	0b bf       	out	0x3b, r16	; 59
+  a6:	02 c0       	rjmp	.+4      	; 0xac <__do_copy_data+0x14>
+  a8:	07 90       	elpm	r0, Z+
+  aa:	0d 92       	st	X+, r0
+  ac:	a0 31       	cpi	r26, 0x10	; 16
+  ae:	b1 07       	cpc	r27, r17
+  b0:	d9 f7       	brne	.-10     	; 0xa8 <__do_copy_data+0x10>
+  b2:	6d d0       	rcall	.+218    	; 0x18e <main>
+  b4:	7e c0       	rjmp	.+252    	; 0x1b2 <_exit>
 
-0000009e <twi_init>:
-outputs:	
-notes:			TWI clock is set to 100 kHz
-Version :    	DMK, Initial code
-*******************************************************************/
-{
-	TWSR = 0;
-  9e:	10 92 71 00 	sts	0x0071, r1
-	TWBR = 32;	 // TWI clock set to 100kHz, prescaler = 0
-  a2:	80 e2       	ldi	r24, 0x20	; 32
-  a4:	80 93 70 00 	sts	0x0070, r24
-  a8:	08 95       	ret
+000000b6 <__bad_interrupt>:
+  b6:	a4 cf       	rjmp	.-184    	; 0x0 <__vectors>
 
-000000aa <twi_start>:
+000000b8 <twi_start>:
 outputs:	
 notes:			
 Version :    	DMK, Initial code
 *******************************************************************/
 {
 	TWCR = (0x80 | 0x20 | 0x04);
-  aa:	84 ea       	ldi	r24, 0xA4	; 164
-  ac:	80 93 74 00 	sts	0x0074, r24
+  b8:	84 ea       	ldi	r24, 0xA4	; 164
+  ba:	80 93 74 00 	sts	0x0074, r24
 	while( 0x00 == (TWCR & 0x80) );
-  b0:	e4 e7       	ldi	r30, 0x74	; 116
-  b2:	f0 e0       	ldi	r31, 0x00	; 0
-  b4:	80 81       	ld	r24, Z
-  b6:	88 23       	and	r24, r24
-  b8:	ec f7       	brge	.-6      	; 0xb4 <twi_start+0xa>
+  be:	e4 e7       	ldi	r30, 0x74	; 116
+  c0:	f0 e0       	ldi	r31, 0x00	; 0
+  c2:	80 81       	ld	r24, Z
+  c4:	88 23       	and	r24, r24
+  c6:	ec f7       	brge	.-6      	; 0xc2 <twi_start+0xa>
 }
-  ba:	08 95       	ret
+  c8:	08 95       	ret
 
-000000bc <twi_stop>:
+000000ca <twi_stop>:
 outputs:	
 notes:			
 Version :    	DMK, Initial code
 *******************************************************************/
 {
 	TWCR = (0x80 | 0x10 | 0x04);
-  bc:	84 e9       	ldi	r24, 0x94	; 148
-  be:	80 93 74 00 	sts	0x0074, r24
-  c2:	08 95       	ret
+  ca:	84 e9       	ldi	r24, 0x94	; 148
+  cc:	80 93 74 00 	sts	0x0074, r24
+  d0:	08 95       	ret
 
-000000c4 <twi_tx>:
+000000d2 <twi_tx>:
 outputs:	
 notes:			
 Version :    	DMK, Initial code
 *******************************************************************/
 {
 	TWDR = data;
-  c4:	80 93 73 00 	sts	0x0073, r24
+  d2:	80 93 73 00 	sts	0x0073, r24
 	TWCR = (0x80 | 0x04);
-  c8:	84 e8       	ldi	r24, 0x84	; 132
-  ca:	80 93 74 00 	sts	0x0074, r24
+  d6:	84 e8       	ldi	r24, 0x84	; 132
+  d8:	80 93 74 00 	sts	0x0074, r24
 	while( 0 == (TWCR & 0x80) );
-  ce:	e4 e7       	ldi	r30, 0x74	; 116
-  d0:	f0 e0       	ldi	r31, 0x00	; 0
-  d2:	80 81       	ld	r24, Z
-  d4:	88 23       	and	r24, r24
-  d6:	ec f7       	brge	.-6      	; 0xd2 <twi_tx+0xe>
+  dc:	e4 e7       	ldi	r30, 0x74	; 116
+  de:	f0 e0       	ldi	r31, 0x00	; 0
+  e0:	80 81       	ld	r24, Z
+  e2:	88 23       	and	r24, r24
+  e4:	ec f7       	brge	.-6      	; 0xe0 <twi_tx+0xe>
 }
-  d8:	08 95       	ret
+  e6:	08 95       	ret
 
-000000da <twi_clear3>:
-
-void twi_clear3(void)
+000000e8 <twi_init>:
+inputs:			
+outputs:	
+notes:			TWI clock is set to 100 kHz
+Version :    	DMK, Initial code
+*******************************************************************/
 {
-	//for(int i = 0; i < 15; i += 2)
-	//{
-		twi_start();
-  da:	e7 df       	rcall	.-50     	; 0xaa <twi_start>
-		twi_tx(0xE0);	// Display I2C addres + R/W bit
-  dc:	80 ee       	ldi	r24, 0xE0	; 224
-  de:	f2 df       	rcall	.-28     	; 0xc4 <twi_tx>
-		twi_tx(0x00);	// Address
-  e0:	80 e0       	ldi	r24, 0x00	; 0
-  e2:	f0 df       	rcall	.-32     	; 0xc4 <twi_tx>
-		twi_tx(0xAF);	// data
-  e4:	8f ea       	ldi	r24, 0xAF	; 175
-  e6:	ee df       	rcall	.-36     	; 0xc4 <twi_tx>
-		twi_tx(0x00);	
-  e8:	80 e0       	ldi	r24, 0x00	; 0
-  ea:	ec df       	rcall	.-40     	; 0xc4 <twi_tx>
-		twi_tx(0x55);	// data
-  ec:	85 e5       	ldi	r24, 0x55	; 85
-  ee:	ea df       	rcall	.-44     	; 0xc4 <twi_tx>
-		twi_tx(0x00);
-  f0:	80 e0       	ldi	r24, 0x00	; 0
-  f2:	e8 df       	rcall	.-48     	; 0xc4 <twi_tx>
-		twi_tx(0x77);	// data
-  f4:	87 e7       	ldi	r24, 0x77	; 119
-  f6:	e6 df       	rcall	.-52     	; 0xc4 <twi_tx>
-		twi_tx(0x00);
-  f8:	80 e0       	ldi	r24, 0x00	; 0
-  fa:	e4 df       	rcall	.-56     	; 0xc4 <twi_tx>
-		twi_tx(0x44);	// data
-  fc:	84 e4       	ldi	r24, 0x44	; 68
-  fe:	e2 df       	rcall	.-60     	; 0xc4 <twi_tx>
-		twi_tx(0x00);
- 100:	80 e0       	ldi	r24, 0x00	; 0
- 102:	e0 df       	rcall	.-64     	; 0xc4 <twi_tx>
-		twi_tx(0x22);	// data
- 104:	82 e2       	ldi	r24, 0x22	; 34
- 106:	de df       	rcall	.-68     	; 0xc4 <twi_tx>
-		twi_tx(0x00);
- 108:	80 e0       	ldi	r24, 0x00	; 0
- 10a:	dc df       	rcall	.-72     	; 0xc4 <twi_tx>
-		twi_tx(0x22);	// data
- 10c:	82 e2       	ldi	r24, 0x22	; 34
- 10e:	da df       	rcall	.-76     	; 0xc4 <twi_tx>
-		twi_tx(0x00);
- 110:	80 e0       	ldi	r24, 0x00	; 0
- 112:	d8 df       	rcall	.-80     	; 0xc4 <twi_tx>
-		twi_tx(0x22);	// data
- 114:	82 e2       	ldi	r24, 0x22	; 34
- 116:	d6 df       	rcall	.-84     	; 0xc4 <twi_tx>
-		twi_tx(0x00);
- 118:	80 e0       	ldi	r24, 0x00	; 0
- 11a:	d4 df       	rcall	.-88     	; 0xc4 <twi_tx>
-		twi_tx(0x22);	// data
- 11c:	82 e2       	ldi	r24, 0x22	; 34
- 11e:	d2 df       	rcall	.-92     	; 0xc4 <twi_tx>
-		twi_stop();
- 120:	cd cf       	rjmp	.-102    	; 0xbc <twi_stop>
- 122:	08 95       	ret
+  e8:	1f 93       	push	r17
+  ea:	cf 93       	push	r28
+  ec:	df 93       	push	r29
+	TWSR = 0;
+  ee:	10 92 71 00 	sts	0x0071, r1
+	TWBR = 32;	 // TWI clock set to 100kHz, prescaler = 0
+  f2:	80 e2       	ldi	r24, 0x20	; 32
+  f4:	80 93 70 00 	sts	0x0070, r24
 
-00000124 <main>:
+	// Init HT16K22. Page 32 datasheet
+	twi_start();
+  f8:	df df       	rcall	.-66     	; 0xb8 <twi_start>
+	twi_tx(0xE0);	// Display I2C addres + R/W bit
+  fa:	80 ee       	ldi	r24, 0xE0	; 224
+  fc:	ea df       	rcall	.-44     	; 0xd2 <twi_tx>
+	twi_tx(0x21);	// Internal osc on (page 10 HT16K33)
+  fe:	81 e2       	ldi	r24, 0x21	; 33
+ 100:	e8 df       	rcall	.-48     	; 0xd2 <twi_tx>
+outputs:	
+notes:			
+Version :    	DMK, Initial code
+*******************************************************************/
+{
+	TWCR = (0x80 | 0x10 | 0x04);
+ 102:	c4 e7       	ldi	r28, 0x74	; 116
+ 104:	d0 e0       	ldi	r29, 0x00	; 0
+ 106:	14 e9       	ldi	r17, 0x94	; 148
+ 108:	18 83       	st	Y, r17
+	twi_start();
+	twi_tx(0xE0);	// Display I2C addres + R/W bit
+	twi_tx(0x21);	// Internal osc on (page 10 HT16K33)
+	twi_stop();
+
+	twi_start();
+ 10a:	d6 df       	rcall	.-84     	; 0xb8 <twi_start>
+	twi_tx(0xE0);	// Display I2C address + R/W bit
+ 10c:	80 ee       	ldi	r24, 0xE0	; 224
+ 10e:	e1 df       	rcall	.-62     	; 0xd2 <twi_tx>
+	twi_tx(0xA0);	// HT16K33 pins all output
+ 110:	80 ea       	ldi	r24, 0xA0	; 160
+ 112:	df df       	rcall	.-66     	; 0xd2 <twi_tx>
+outputs:	
+notes:			
+Version :    	DMK, Initial code
+*******************************************************************/
+{
+	TWCR = (0x80 | 0x10 | 0x04);
+ 114:	18 83       	st	Y, r17
+	twi_start();
+	twi_tx(0xE0);	// Display I2C address + R/W bit
+	twi_tx(0xA0);	// HT16K33 pins all output
+	twi_stop();
+
+	twi_start();
+ 116:	d0 df       	rcall	.-96     	; 0xb8 <twi_start>
+	twi_tx(0xE0);	// Display I2C address + R/W bit
+ 118:	80 ee       	ldi	r24, 0xE0	; 224
+ 11a:	db df       	rcall	.-74     	; 0xd2 <twi_tx>
+	twi_tx(0xE3);	// Display Dimming 4/16 duty cycle
+ 11c:	83 ee       	ldi	r24, 0xE3	; 227
+ 11e:	d9 df       	rcall	.-78     	; 0xd2 <twi_tx>
+outputs:	
+notes:			
+Version :    	DMK, Initial code
+*******************************************************************/
+{
+	TWCR = (0x80 | 0x10 | 0x04);
+ 120:	18 83       	st	Y, r17
+	twi_start();
+	twi_tx(0xE0);	// Display I2C address + R/W bit
+	twi_tx(0xE3);	// Display Dimming 4/16 duty cycle
+	twi_stop();
+
+	twi_start();
+ 122:	ca df       	rcall	.-108    	; 0xb8 <twi_start>
+	twi_tx(0xE0);	// Display I2C address + R/W bit
+ 124:	80 ee       	ldi	r24, 0xE0	; 224
+ 126:	d5 df       	rcall	.-86     	; 0xd2 <twi_tx>
+	twi_tx(0x81);	// Display OFF - Blink On
+ 128:	81 e8       	ldi	r24, 0x81	; 129
+ 12a:	d3 df       	rcall	.-90     	; 0xd2 <twi_tx>
+outputs:	
+notes:			
+Version :    	DMK, Initial code
+*******************************************************************/
+{
+	TWCR = (0x80 | 0x10 | 0x04);
+ 12c:	18 83       	st	Y, r17
+
+	twi_start();
+	twi_tx(0xE0);	// Display I2C address + R/W bit
+	twi_tx(0x81);	// Display OFF - Blink On
+	twi_stop();
+}
+ 12e:	df 91       	pop	r29
+ 130:	cf 91       	pop	r28
+ 132:	1f 91       	pop	r17
+ 134:	08 95       	ret
+
+00000136 <wait>:
+				clock value is set. This is used by _delay_ms inside
+				util/delay.h
+Version :    	DMK, Initial code
+*******************************************************************/
+{
+	for (int i=0; i<ms; i++)
+ 136:	18 16       	cp	r1, r24
+ 138:	19 06       	cpc	r1, r25
+ 13a:	6c f4       	brge	.+26     	; 0x156 <wait+0x20>
+ 13c:	20 e0       	ldi	r18, 0x00	; 0
+ 13e:	30 e0       	ldi	r19, 0x00	; 0
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 140:	e9 ef       	ldi	r30, 0xF9	; 249
+ 142:	f0 e0       	ldi	r31, 0x00	; 0
+ 144:	31 97       	sbiw	r30, 0x01	; 1
+ 146:	f1 f7       	brne	.-4      	; 0x144 <wait+0xe>
+ 148:	00 c0       	rjmp	.+0      	; 0x14a <wait+0x14>
+ 14a:	00 00       	nop
+ 14c:	2f 5f       	subi	r18, 0xFF	; 255
+ 14e:	3f 4f       	sbci	r19, 0xFF	; 255
+ 150:	28 17       	cp	r18, r24
+ 152:	39 07       	cpc	r19, r25
+ 154:	a9 f7       	brne	.-22     	; 0x140 <wait+0xa>
+ 156:	08 95       	ret
+
+00000158 <twi_data>:
+PATTERN_STRUCT pattern[] = {
+	{0x00, 0b00011110}, {0x02, 0b00100001}, {0x04, 0b11010100}, {0x06, 0b11000010}, {0x08, 0b11000010}, {0x0A, 0b11010100}, {0x0C, 0b00100001}, {0x0E, 0b00011110}
+};
+
+void twi_data(void)
+{
+ 158:	0f 93       	push	r16
+ 15a:	1f 93       	push	r17
+ 15c:	cf 93       	push	r28
+ 15e:	df 93       	push	r29
+	twi_start();
+ 160:	ab df       	rcall	.-170    	; 0xb8 <twi_start>
+	twi_tx(0xE0);
+ 162:	80 ee       	ldi	r24, 0xE0	; 224
+ 164:	b6 df       	rcall	.-148    	; 0xd2 <twi_tx>
+ 166:	c1 e0       	ldi	r28, 0x01	; 1
+ 168:	d1 e0       	ldi	r29, 0x01	; 1
+ 16a:	01 e1       	ldi	r16, 0x11	; 17
+ 16c:	11 e0       	ldi	r17, 0x01	; 1
+ 16e:	fe 01       	movw	r30, r28
+ 170:	31 97       	sbiw	r30, 0x01	; 1
+	for (int i = 0; i < 8; i++)
+	{
+		twi_tx(pattern[i].address);
+ 172:	80 81       	ld	r24, Z
+ 174:	ae df       	rcall	.-164    	; 0xd2 <twi_tx>
+		twi_tx(pattern[i].data);
+ 176:	88 81       	ld	r24, Y
+ 178:	ac df       	rcall	.-168    	; 0xd2 <twi_tx>
+ 17a:	22 96       	adiw	r28, 0x02	; 2
+
+void twi_data(void)
+{
+	twi_start();
+	twi_tx(0xE0);
+	for (int i = 0; i < 8; i++)
+ 17c:	c0 17       	cp	r28, r16
+ 17e:	d1 07       	cpc	r29, r17
+ 180:	b1 f7       	brne	.-20     	; 0x16e <twi_data+0x16>
+	{
+		twi_tx(pattern[i].address);
+		twi_tx(pattern[i].data);
+		
+	}
+	twi_stop();
+ 182:	a3 df       	rcall	.-186    	; 0xca <twi_stop>
+}
+ 184:	df 91       	pop	r29
+ 186:	cf 91       	pop	r28
+ 188:	1f 91       	pop	r17
+ 18a:	0f 91       	pop	r16
+ 18c:	08 95       	ret
+
+0000018e <main>:
 notes:			Looping forever, trashing the HT16K33
 Version :    	DMK, Initial code
 *******************************************************************/
 {
 	
 	twi_init();		// Init TWI interface
- 124:	bc df       	rcall	.-136    	; 0x9e <twi_init>
-
-	// Init HT16K22. Page 32 datasheet
-	twi_start();
- 126:	c1 df       	rcall	.-126    	; 0xaa <twi_start>
-	twi_tx(0xE0);	// Display I2C addres + R/W bit
- 128:	80 ee       	ldi	r24, 0xE0	; 224
- 12a:	cc df       	rcall	.-104    	; 0xc4 <twi_tx>
-	twi_tx(0x21);	// Internal osc on (page 10 HT16K33)
- 12c:	81 e2       	ldi	r24, 0x21	; 33
- 12e:	ca df       	rcall	.-108    	; 0xc4 <twi_tx>
-	twi_stop();
- 130:	c5 df       	rcall	.-118    	; 0xbc <twi_stop>
+ 18e:	ac df       	rcall	.-168    	; 0xe8 <twi_init>
 
 	twi_start();
- 132:	bb df       	rcall	.-138    	; 0xaa <twi_start>
-	twi_tx(0xE0);	// Display I2C address + R/W bit
- 134:	80 ee       	ldi	r24, 0xE0	; 224
- 136:	c6 df       	rcall	.-116    	; 0xc4 <twi_tx>
-	twi_tx(0xA0);	// HT16K33 pins all output
- 138:	80 ea       	ldi	r24, 0xA0	; 160
- 13a:	c4 df       	rcall	.-120    	; 0xc4 <twi_tx>
-	twi_stop();
- 13c:	bf df       	rcall	.-130    	; 0xbc <twi_stop>
-
-	twi_start();
- 13e:	b5 df       	rcall	.-150    	; 0xaa <twi_start>
-	twi_tx(0xE0);	// Display I2C address + R/W bit
- 140:	80 ee       	ldi	r24, 0xE0	; 224
- 142:	c0 df       	rcall	.-128    	; 0xc4 <twi_tx>
-	twi_tx(0xE3);	// Display Dimming 4/16 duty cycle
- 144:	83 ee       	ldi	r24, 0xE3	; 227
- 146:	be df       	rcall	.-132    	; 0xc4 <twi_tx>
-	twi_stop();
- 148:	b9 df       	rcall	.-142    	; 0xbc <twi_stop>
-
-	twi_start();
- 14a:	af df       	rcall	.-162    	; 0xaa <twi_start>
-	twi_tx(0xE0);	// Display I2C address + R/W bit
- 14c:	80 ee       	ldi	r24, 0xE0	; 224
- 14e:	ba df       	rcall	.-140    	; 0xc4 <twi_tx>
-	twi_tx(0x81);	// Display OFF - Blink On
- 150:	81 e8       	ldi	r24, 0x81	; 129
- 152:	b8 df       	rcall	.-144    	; 0xc4 <twi_tx>
-	twi_stop();
- 154:	b3 df       	rcall	.-154    	; 0xbc <twi_stop>
-		//twi_tx(0x0b00000000);	// data
-		//twi_stop();
-//
-		twi_start();
-		twi_tx(0xE0);
+ 190:	93 df       	rcall	.-218    	; 0xb8 <twi_start>
+	twi_tx(0xE0);
+ 192:	80 ee       	ldi	r24, 0xE0	; 224
+ 194:	9e df       	rcall	.-196    	; 0xd2 <twi_tx>
+	twi_tx(0x00);
+ 196:	80 e0       	ldi	r24, 0x00	; 0
+ 198:	9c df       	rcall	.-200    	; 0xd2 <twi_tx>
+ 19a:	c0 e1       	ldi	r28, 0x10	; 16
+ 19c:	d0 e0       	ldi	r29, 0x00	; 0
+	for(int i = 0; i < 16; i++)
+	{
 		twi_tx(0x00);
- 156:	00 e1       	ldi	r16, 0x10	; 16
- 158:	10 e0       	ldi	r17, 0x00	; 0
-	twi_tx(0x81);	// Display OFF - Blink On
+ 19e:	80 e0       	ldi	r24, 0x00	; 0
+ 1a0:	98 df       	rcall	.-208    	; 0xd2 <twi_tx>
+ 1a2:	21 97       	sbiw	r28, 0x01	; 1
+	twi_init();		// Init TWI interface
+
+	twi_start();
+	twi_tx(0xE0);
+	twi_tx(0x00);
+	for(int i = 0; i < 16; i++)
+ 1a4:	e1 f7       	brne	.-8      	; 0x19e <main+0x10>
+	{
+		twi_tx(0x00);
+	}
 	twi_stop();
+ 1a6:	91 df       	rcall	.-222    	; 0xca <twi_stop>
+	twi_data();
+ 1a8:	d7 df       	rcall	.-82     	; 0x158 <twi_data>
 
 	while (1)
 	{
-		twi_clear3();
- 15a:	bf df       	rcall	.-130    	; 0xda <twi_clear3>
-		//twi_tx(0xE0);	// Display I2C addres + R/W bit
+		wait(500);
+ 1aa:	84 ef       	ldi	r24, 0xF4	; 244
+ 1ac:	91 e0       	ldi	r25, 0x01	; 1
+ 1ae:	c3 df       	rcall	.-122    	; 0x136 <wait>
 		//twi_tx(0x00);	// Address
 		//twi_tx(0x0b00000000);	// data
 		//twi_stop();
 //
-		twi_start();
- 15c:	a6 df       	rcall	.-180    	; 0xaa <twi_start>
-		twi_tx(0xE0);
- 15e:	80 ee       	ldi	r24, 0xE0	; 224
- 160:	b1 df       	rcall	.-158    	; 0xc4 <twi_tx>
-		twi_tx(0x00);
- 162:	80 e0       	ldi	r24, 0x00	; 0
- 164:	af df       	rcall	.-162    	; 0xc4 <twi_tx>
- 166:	c0 2f       	mov	r28, r16
- 168:	d1 2f       	mov	r29, r17
-		for(int i = 0; i < 16; i++)
-		{
-			twi_tx(0x00);
- 16a:	80 e0       	ldi	r24, 0x00	; 0
- 16c:	ab df       	rcall	.-170    	; 0xc4 <twi_tx>
- 16e:	21 97       	sbiw	r28, 0x01	; 1
-		//twi_stop();
-//
-		twi_start();
-		twi_tx(0xE0);
-		twi_tx(0x00);
-		for(int i = 0; i < 16; i++)
- 170:	e1 f7       	brne	.-8      	; 0x16a <main+0x46>
-		{
-			twi_tx(0x00);
-		}
-		twi_stop();
- 172:	a4 df       	rcall	.-184    	; 0xbc <twi_stop>
 		//wait(500);
 	}
- 174:	f2 cf       	rjmp	.-28     	; 0x15a <main+0x36>
+ 1b0:	fc cf       	rjmp	.-8      	; 0x1aa <main+0x1c>
 
-00000176 <_exit>:
- 176:	f8 94       	cli
+000001b2 <_exit>:
+ 1b2:	f8 94       	cli
 
-00000178 <__stop_program>:
- 178:	ff cf       	rjmp	.-2      	; 0x178 <__stop_program>
+000001b4 <__stop_program>:
+ 1b4:	ff cf       	rjmp	.-2      	; 0x1b4 <__stop_program>
