@@ -26,15 +26,15 @@ typedef struct {
 	unsigned char data ;
 } PATTERN_STRUCT;
 
-PATTERN_STRUCT pattern[] = {
+PATTERN_STRUCT smiley[] = { //pattern voor een blije emoticon
 	{0x00, 0b00011110}, {0x02, 0b00100001}, {0x04, 0b11010100}, {0x06, 0b11000010}, {0x08, 0b11000010}, {0x0A, 0b11010100}, {0x0C, 0b00100001}, {0x0E, 0b00011110}
 };
 
-PATTERN_STRUCT pattern2[] = {
+PATTERN_STRUCT downey[] = { //pattern voor een boze emoticon
 	{0x00, 0b00011110}, {0x02, 0b00100001}, {0x04, 0b11010010}, {0x06, 0b11000100}, {0x08, 0b11000100}, {0x0A, 0b11010010}, {0x0C, 0b00100001}, {0x0E, 0b00011110}
 };
 
-PATTERN_STRUCT pattern3[] = {
+PATTERN_STRUCT brainfart[] = { //pattern voor tripstate
 	{0x00, 0x00}, {0x02, 0x00}, {0x04, 0x00}, {0x06, 0x00}, {0x08, 0x00}, {0x0A, 0x00}, {0x0C, 0x00}, {0x0E, 0x00},
 	{0x00, 0b00000000}, {0x02, 0b00000000}, {0x04, 0b00000000}, {0x06, 0b00001100}, {0x08, 0b00001100}, {0x0A, 0b00000000}, {0x0C, 0b00000000}, {0x0E, 0b00000000},
 	{0x00, 0b00000000}, {0x02, 0b00000000}, {0x04, 0b00011110}, {0x06, 0b00010010}, {0x08, 0b00010010}, {0x0A, 0b00011110}, {0x0C, 0b00000000}, {0x0E, 0b00000000},
@@ -43,7 +43,7 @@ PATTERN_STRUCT pattern3[] = {
 };
 
 
-void twi_data(void)
+void twi_data(PATTERN_STRUCT pattern[]) //geeft een simpele pattern weer
 {
 	twi_start();
 	twi_tx(0xE0);
@@ -55,27 +55,27 @@ void twi_data(void)
 	twi_stop();
 }
 
-void twi_data2(void)
+void twi_data_inverse(PATTERN_STRUCT pattern[]) //geeft pattern weer (inverted) nog niet getest!
 {
 	twi_start();
 	twi_tx(0xE0);
 	for (int i = 0; i < 8; i++)
 	{
-		twi_tx(pattern2[i].address);
-		twi_tx(pattern2[i].data);
+		twi_tx(pattern[i].address);
+		twi_tx(pattern[i].data |~(0xFF));
 	}
 	twi_stop();
 }
 
-void twi_data3()
+void twi_data3() //geeft animatie weer (brainfart pattern)
 {
 	twi_start();
 	twi_tx(0xE0);
 
 	for (int i = 0; i < 8; i++)
 	{
-		twi_tx(pattern3[i + index * 8].address);
-		twi_tx(pattern3[i + index * 8].data);
+		twi_tx(brainfart[i + index * 8].address);
+		twi_tx(brainfart[i + index * 8].data);
 	}
 	index++;
 	if(index > 4)
@@ -106,7 +106,7 @@ Version :    	DMK, Initial code
 		twi_tx(0x00);
 	}
 	twi_stop();
-	DDRA = 0x00;
+	DDRA = 0x00; //input open on port A
 	index = 0;
 
 	while (1)
@@ -114,15 +114,19 @@ Version :    	DMK, Initial code
 		wait(750);
 		if(PINA & 0x01)
 		{
-			twi_data2();
+			twi_data(downey);
 		}
 		else if(PINA & 0x02)
 		{
 			twi_data3();
 		}
+		else if(PINA & 0x04)
+		{
+			twi_data_inverse(smiley);
+		}
 		else
 		{
-			twi_data();
+			twi_data(smiley);
 			index = 0;
 		}
 	}

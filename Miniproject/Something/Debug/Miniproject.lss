@@ -3,31 +3,31 @@ Miniproject.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000070  00800100  000002aa  0000033e  2**0
+  0 .data         00000070  00800100  000002c8  0000035c  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         000002aa  00000000  00000000  00000094  2**1
+  1 .text         000002c8  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          00000002  00800170  00800170  000003ae  2**0
+  2 .bss          00000002  00800170  00800170  000003cc  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  000003ae  2**0
+  3 .comment      00000030  00000000  00000000  000003cc  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000003e0  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000003fc  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000078  00000000  00000000  0000041c  2**0
+  5 .debug_aranges 00000078  00000000  00000000  00000438  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   000005f6  00000000  00000000  00000494  2**0
+  6 .debug_info   00000672  00000000  00000000  000004b0  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 000002c9  00000000  00000000  00000a8a  2**0
+  7 .debug_abbrev 000002c7  00000000  00000000  00000b22  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   0000041d  00000000  00000000  00000d53  2**0
+  8 .debug_line   00000430  00000000  00000000  00000de9  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  000000fc  00000000  00000000  00001170  2**2
+  9 .debug_frame  000000fc  00000000  00000000  0000121c  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    0000022c  00000000  00000000  0000126c  2**0
+ 10 .debug_str    00000239  00000000  00000000  00001318  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000221  00000000  00000000  00001498  2**0
+ 11 .debug_loc    000002a7  00000000  00000000  00001551  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000058  00000000  00000000  000016b9  2**0
+ 12 .debug_ranges 00000058  00000000  00000000  000017f8  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -116,7 +116,7 @@ Disassembly of section .text:
   98:	11 e0       	ldi	r17, 0x01	; 1
   9a:	a0 e0       	ldi	r26, 0x00	; 0
   9c:	b1 e0       	ldi	r27, 0x01	; 1
-  9e:	ea ea       	ldi	r30, 0xAA	; 170
+  9e:	e8 ec       	ldi	r30, 0xC8	; 200
   a0:	f2 e0       	ldi	r31, 0x02	; 2
   a2:	00 e0       	ldi	r16, 0x00	; 0
   a4:	0b bf       	out	0x3b, r16	; 59
@@ -140,8 +140,8 @@ Disassembly of section .text:
   bc:	a2 37       	cpi	r26, 0x72	; 114
   be:	b2 07       	cpc	r27, r18
   c0:	e1 f7       	brne	.-8      	; 0xba <.do_clear_bss_loop>
-  c2:	ce d0       	rcall	.+412    	; 0x260 <main>
-  c4:	f0 c0       	rjmp	.+480    	; 0x2a6 <_exit>
+  c2:	d3 d0       	rcall	.+422    	; 0x26a <main>
+  c4:	ff c0       	rjmp	.+510    	; 0x2c4 <_exit>
 
 000000c6 <__bad_interrupt>:
   c6:	9c cf       	rjmp	.-200    	; 0x0 <__vectors>
@@ -195,418 +195,438 @@ Version :    	DMK, Initial code
 }
   f6:	08 95       	ret
 
-000000f8 <twi_init>:
-inputs:			
-outputs:	
-notes:			TWI clock is set to 100 kHz
-Version :    	DMK, Initial code
-*******************************************************************/
-{
-  f8:	1f 93       	push	r17
-  fa:	cf 93       	push	r28
-  fc:	df 93       	push	r29
-	TWSR = 0;
-  fe:	10 92 71 00 	sts	0x0071, r1
-	TWBR = 32;	 // TWI clock set to 100kHz, prescaler = 0
- 102:	80 e2       	ldi	r24, 0x20	; 32
- 104:	80 93 70 00 	sts	0x0070, r24
-
-	// Init HT16K22. Page 32 datasheet
-	twi_start();
- 108:	df df       	rcall	.-66     	; 0xc8 <twi_start>
-	twi_tx(0xE0);	// Display I2C addres + R/W bit
- 10a:	80 ee       	ldi	r24, 0xE0	; 224
- 10c:	ea df       	rcall	.-44     	; 0xe2 <twi_tx>
-	twi_tx(0x21);	// Internal osc on (page 10 HT16K33)
- 10e:	81 e2       	ldi	r24, 0x21	; 33
- 110:	e8 df       	rcall	.-48     	; 0xe2 <twi_tx>
-outputs:	
-notes:			
-Version :    	DMK, Initial code
-*******************************************************************/
-{
-	TWCR = (0x80 | 0x10 | 0x04);
- 112:	c4 e7       	ldi	r28, 0x74	; 116
- 114:	d0 e0       	ldi	r29, 0x00	; 0
- 116:	14 e9       	ldi	r17, 0x94	; 148
- 118:	18 83       	st	Y, r17
-	twi_start();
-	twi_tx(0xE0);	// Display I2C addres + R/W bit
-	twi_tx(0x21);	// Internal osc on (page 10 HT16K33)
-	twi_stop();
-
-	twi_start();
- 11a:	d6 df       	rcall	.-84     	; 0xc8 <twi_start>
-	twi_tx(0xE0);	// Display I2C address + R/W bit
- 11c:	80 ee       	ldi	r24, 0xE0	; 224
- 11e:	e1 df       	rcall	.-62     	; 0xe2 <twi_tx>
-	twi_tx(0xA0);	// HT16K33 pins all output
- 120:	80 ea       	ldi	r24, 0xA0	; 160
- 122:	df df       	rcall	.-66     	; 0xe2 <twi_tx>
-outputs:	
-notes:			
-Version :    	DMK, Initial code
-*******************************************************************/
-{
-	TWCR = (0x80 | 0x10 | 0x04);
- 124:	18 83       	st	Y, r17
-	twi_start();
-	twi_tx(0xE0);	// Display I2C address + R/W bit
-	twi_tx(0xA0);	// HT16K33 pins all output
-	twi_stop();
-
-	twi_start();
- 126:	d0 df       	rcall	.-96     	; 0xc8 <twi_start>
-	twi_tx(0xE0);	// Display I2C address + R/W bit
- 128:	80 ee       	ldi	r24, 0xE0	; 224
- 12a:	db df       	rcall	.-74     	; 0xe2 <twi_tx>
-	twi_tx(0xE3);	// Display Dimming 4/16 duty cycle
- 12c:	83 ee       	ldi	r24, 0xE3	; 227
- 12e:	d9 df       	rcall	.-78     	; 0xe2 <twi_tx>
-outputs:	
-notes:			
-Version :    	DMK, Initial code
-*******************************************************************/
-{
-	TWCR = (0x80 | 0x10 | 0x04);
- 130:	18 83       	st	Y, r17
-	twi_start();
-	twi_tx(0xE0);	// Display I2C address + R/W bit
-	twi_tx(0xE3);	// Display Dimming 4/16 duty cycle
-	twi_stop();
-
-	twi_start();
- 132:	ca df       	rcall	.-108    	; 0xc8 <twi_start>
-	twi_tx(0xE0);	// Display I2C address + R/W bit
- 134:	80 ee       	ldi	r24, 0xE0	; 224
- 136:	d5 df       	rcall	.-86     	; 0xe2 <twi_tx>
-	twi_tx(0x81);	// Display OFF - Blink On
- 138:	81 e8       	ldi	r24, 0x81	; 129
- 13a:	d3 df       	rcall	.-90     	; 0xe2 <twi_tx>
-outputs:	
-notes:			
-Version :    	DMK, Initial code
-*******************************************************************/
-{
-	TWCR = (0x80 | 0x10 | 0x04);
- 13c:	18 83       	st	Y, r17
-
-	twi_start();
-	twi_tx(0xE0);	// Display I2C address + R/W bit
-	twi_tx(0x81);	// Display OFF - Blink On
-	twi_stop();
-}
- 13e:	df 91       	pop	r29
- 140:	cf 91       	pop	r28
- 142:	1f 91       	pop	r17
- 144:	08 95       	ret
-
-00000146 <wait>:
+000000f8 <wait>:
 				clock value is set. This is used by _delay_ms inside
 				util/delay.h
 Version :    	DMK, Initial code
 *******************************************************************/
 {
 	for (int i=0; i<ms; i++)
- 146:	18 16       	cp	r1, r24
- 148:	19 06       	cpc	r1, r25
- 14a:	6c f4       	brge	.+26     	; 0x166 <wait+0x20>
- 14c:	20 e0       	ldi	r18, 0x00	; 0
- 14e:	30 e0       	ldi	r19, 0x00	; 0
+  f8:	18 16       	cp	r1, r24
+  fa:	19 06       	cpc	r1, r25
+  fc:	6c f4       	brge	.+26     	; 0x118 <wait+0x20>
+  fe:	20 e0       	ldi	r18, 0x00	; 0
+ 100:	30 e0       	ldi	r19, 0x00	; 0
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 150:	e9 ef       	ldi	r30, 0xF9	; 249
- 152:	f0 e0       	ldi	r31, 0x00	; 0
- 154:	31 97       	sbiw	r30, 0x01	; 1
- 156:	f1 f7       	brne	.-4      	; 0x154 <wait+0xe>
- 158:	00 c0       	rjmp	.+0      	; 0x15a <wait+0x14>
- 15a:	00 00       	nop
- 15c:	2f 5f       	subi	r18, 0xFF	; 255
- 15e:	3f 4f       	sbci	r19, 0xFF	; 255
- 160:	28 17       	cp	r18, r24
- 162:	39 07       	cpc	r19, r25
- 164:	a9 f7       	brne	.-22     	; 0x150 <wait+0xa>
- 166:	08 95       	ret
+ 102:	e9 ef       	ldi	r30, 0xF9	; 249
+ 104:	f0 e0       	ldi	r31, 0x00	; 0
+ 106:	31 97       	sbiw	r30, 0x01	; 1
+ 108:	f1 f7       	brne	.-4      	; 0x106 <wait+0xe>
+ 10a:	00 c0       	rjmp	.+0      	; 0x10c <wait+0x14>
+ 10c:	00 00       	nop
+ 10e:	2f 5f       	subi	r18, 0xFF	; 255
+ 110:	3f 4f       	sbci	r19, 0xFF	; 255
+ 112:	28 17       	cp	r18, r24
+ 114:	39 07       	cpc	r19, r25
+ 116:	a9 f7       	brne	.-22     	; 0x102 <wait+0xa>
+ 118:	08 95       	ret
 
-00000168 <twi_data>:
+0000011a <twi_init>:
+inputs:			
+outputs:	
+notes:			TWI clock is set to 100 kHz
+Version :    	DMK, Initial code
+*******************************************************************/
+{
+ 11a:	1f 93       	push	r17
+ 11c:	cf 93       	push	r28
+ 11e:	df 93       	push	r29
+	TWSR = 0;	 // CPU clock/(16 + 2 * TWBR * (4^TWSR))
+ 120:	10 92 71 00 	sts	0x0071, r1
+	TWBR = 32;	 // TWI clock set to 100kHz, prescaler = 0
+ 124:	80 e2       	ldi	r24, 0x20	; 32
+ 126:	80 93 70 00 	sts	0x0070, r24
+
+	// Init HT16K22. Page 32 datasheet
+	twi_start();
+ 12a:	ce df       	rcall	.-100    	; 0xc8 <twi_start>
+	twi_tx(0xE0);	// Display I2C addres + R/W bit
+ 12c:	80 ee       	ldi	r24, 0xE0	; 224
+ 12e:	d9 df       	rcall	.-78     	; 0xe2 <twi_tx>
+	twi_tx(0x21);	// Internal osc on (page 10 HT16K33)
+ 130:	81 e2       	ldi	r24, 0x21	; 33
+ 132:	d7 df       	rcall	.-82     	; 0xe2 <twi_tx>
+outputs:	
+notes:			
+Version :    	DMK, Initial code
+*******************************************************************/
+{
+	TWCR = (0x80 | 0x10 | 0x04);
+ 134:	c4 e7       	ldi	r28, 0x74	; 116
+ 136:	d0 e0       	ldi	r29, 0x00	; 0
+ 138:	14 e9       	ldi	r17, 0x94	; 148
+ 13a:	18 83       	st	Y, r17
+	twi_start();
+	twi_tx(0xE0);	// Display I2C addres + R/W bit
+	twi_tx(0x21);	// Internal osc on (page 10 HT16K33)
+	twi_stop();
+
+	twi_start();
+ 13c:	c5 df       	rcall	.-118    	; 0xc8 <twi_start>
+	twi_tx(0xE0);	// Display I2C address + R/W bit
+ 13e:	80 ee       	ldi	r24, 0xE0	; 224
+ 140:	d0 df       	rcall	.-96     	; 0xe2 <twi_tx>
+	twi_tx(0xA0);	// HT16K33 pins all output
+ 142:	80 ea       	ldi	r24, 0xA0	; 160
+ 144:	ce df       	rcall	.-100    	; 0xe2 <twi_tx>
+outputs:	
+notes:			
+Version :    	DMK, Initial code
+*******************************************************************/
+{
+	TWCR = (0x80 | 0x10 | 0x04);
+ 146:	18 83       	st	Y, r17
+	twi_start();
+	twi_tx(0xE0);	// Display I2C address + R/W bit
+	twi_tx(0xA0);	// HT16K33 pins all output
+	twi_stop();
+
+	twi_start();
+ 148:	bf df       	rcall	.-130    	; 0xc8 <twi_start>
+	twi_tx(0xE0);	// Display I2C address + R/W bit
+ 14a:	80 ee       	ldi	r24, 0xE0	; 224
+ 14c:	ca df       	rcall	.-108    	; 0xe2 <twi_tx>
+	twi_tx(0xE3);	// Display Dimming 4/16 duty cycle
+ 14e:	83 ee       	ldi	r24, 0xE3	; 227
+ 150:	c8 df       	rcall	.-112    	; 0xe2 <twi_tx>
+outputs:	
+notes:			
+Version :    	DMK, Initial code
+*******************************************************************/
+{
+	TWCR = (0x80 | 0x10 | 0x04);
+ 152:	18 83       	st	Y, r17
+	twi_start();
+	twi_tx(0xE0);	// Display I2C address + R/W bit
+	twi_tx(0xE3);	// Display Dimming 4/16 duty cycle
+	twi_stop();
+
+	twi_start();
+ 154:	b9 df       	rcall	.-142    	; 0xc8 <twi_start>
+	twi_tx(0xE0);	// Display I2C address + R/W bit
+ 156:	80 ee       	ldi	r24, 0xE0	; 224
+ 158:	c4 df       	rcall	.-120    	; 0xe2 <twi_tx>
+	twi_tx(0x81);	// Display OFF - Blink On
+ 15a:	81 e8       	ldi	r24, 0x81	; 129
+ 15c:	c2 df       	rcall	.-124    	; 0xe2 <twi_tx>
+outputs:	
+notes:			
+Version :    	DMK, Initial code
+*******************************************************************/
+{
+	TWCR = (0x80 | 0x10 | 0x04);
+ 15e:	18 83       	st	Y, r17
+	twi_start();
+	twi_tx(0xE0);	// Display I2C address + R/W bit
+	twi_tx(0x81);	// Display OFF - Blink On
+	twi_stop();
+
+	wait(1000);
+ 160:	88 ee       	ldi	r24, 0xE8	; 232
+ 162:	93 e0       	ldi	r25, 0x03	; 3
+ 164:	c9 df       	rcall	.-110    	; 0xf8 <wait>
+}
+ 166:	df 91       	pop	r29
+ 168:	cf 91       	pop	r28
+ 16a:	1f 91       	pop	r17
+ 16c:	08 95       	ret
+
+0000016e <twi_data>:
 	{0x00, 0b11111111}, {0x02, 0b11000000}, {0x04, 0b11011110}, {0x06, 0b11010010}, {0x08, 0b11010010}, {0x0A, 0b11011110}, {0x0C, 0b11000000}, {0x0E, 0b11111111}
 };
 
 
-void twi_data(void)
+void twi_data(PATTERN_STRUCT pattern[]) //geeft een simpele pattern weer
 {
- 168:	0f 93       	push	r16
- 16a:	1f 93       	push	r17
- 16c:	cf 93       	push	r28
- 16e:	df 93       	push	r29
+ 16e:	0f 93       	push	r16
+ 170:	1f 93       	push	r17
+ 172:	cf 93       	push	r28
+ 174:	df 93       	push	r29
+ 176:	8c 01       	movw	r16, r24
 	twi_start();
- 170:	ab df       	rcall	.-170    	; 0xc8 <twi_start>
+ 178:	a7 df       	rcall	.-178    	; 0xc8 <twi_start>
 	twi_tx(0xE0);
- 172:	80 ee       	ldi	r24, 0xE0	; 224
- 174:	b6 df       	rcall	.-148    	; 0xe2 <twi_tx>
- 176:	c1 e6       	ldi	r28, 0x61	; 97
- 178:	d1 e0       	ldi	r29, 0x01	; 1
- 17a:	01 e7       	ldi	r16, 0x71	; 113
- 17c:	11 e0       	ldi	r17, 0x01	; 1
- 17e:	fe 01       	movw	r30, r28
- 180:	31 97       	sbiw	r30, 0x01	; 1
+ 17a:	80 ee       	ldi	r24, 0xE0	; 224
+ 17c:	b2 df       	rcall	.-156    	; 0xe2 <twi_tx>
+ 17e:	e8 01       	movw	r28, r16
+ 180:	21 96       	adiw	r28, 0x01	; 1
+ 182:	0f 5e       	subi	r16, 0xEF	; 239
+ 184:	1f 4f       	sbci	r17, 0xFF	; 255
+ 186:	fe 01       	movw	r30, r28
+ 188:	31 97       	sbiw	r30, 0x01	; 1
 	for (int i = 0; i < 8; i++)
 	{
 		twi_tx(pattern[i].address);
- 182:	80 81       	ld	r24, Z
- 184:	ae df       	rcall	.-164    	; 0xe2 <twi_tx>
+ 18a:	80 81       	ld	r24, Z
+ 18c:	aa df       	rcall	.-172    	; 0xe2 <twi_tx>
 		twi_tx(pattern[i].data);
- 186:	88 81       	ld	r24, Y
- 188:	ac df       	rcall	.-168    	; 0xe2 <twi_tx>
- 18a:	22 96       	adiw	r28, 0x02	; 2
+ 18e:	88 81       	ld	r24, Y
+ 190:	a8 df       	rcall	.-176    	; 0xe2 <twi_tx>
+ 192:	22 96       	adiw	r28, 0x02	; 2
 
-void twi_data(void)
+void twi_data(PATTERN_STRUCT pattern[]) //geeft een simpele pattern weer
 {
 	twi_start();
 	twi_tx(0xE0);
 	for (int i = 0; i < 8; i++)
- 18c:	c0 17       	cp	r28, r16
- 18e:	d1 07       	cpc	r29, r17
- 190:	b1 f7       	brne	.-20     	; 0x17e <twi_data+0x16>
+ 194:	c0 17       	cp	r28, r16
+ 196:	d1 07       	cpc	r29, r17
+ 198:	b1 f7       	brne	.-20     	; 0x186 <twi_data+0x18>
 	{
 		twi_tx(pattern[i].address);
 		twi_tx(pattern[i].data);
 	}
 	twi_stop();
- 192:	a3 df       	rcall	.-186    	; 0xda <twi_stop>
+ 19a:	9f df       	rcall	.-194    	; 0xda <twi_stop>
 }
- 194:	df 91       	pop	r29
- 196:	cf 91       	pop	r28
- 198:	1f 91       	pop	r17
- 19a:	0f 91       	pop	r16
- 19c:	08 95       	ret
+ 19c:	df 91       	pop	r29
+ 19e:	cf 91       	pop	r28
+ 1a0:	1f 91       	pop	r17
+ 1a2:	0f 91       	pop	r16
+ 1a4:	08 95       	ret
 
-0000019e <twi_data2>:
+000001a6 <twi_data_inverse>:
 
-void twi_data2(void)
+void twi_data_inverse(PATTERN_STRUCT pattern[]) //geeft pattern weer (inverted) nog niet getest!
 {
- 19e:	0f 93       	push	r16
- 1a0:	1f 93       	push	r17
- 1a2:	cf 93       	push	r28
- 1a4:	df 93       	push	r29
+ 1a6:	0f 93       	push	r16
+ 1a8:	1f 93       	push	r17
+ 1aa:	cf 93       	push	r28
+ 1ac:	df 93       	push	r29
+ 1ae:	8c 01       	movw	r16, r24
 	twi_start();
- 1a6:	90 df       	rcall	.-224    	; 0xc8 <twi_start>
+ 1b0:	8b df       	rcall	.-234    	; 0xc8 <twi_start>
 	twi_tx(0xE0);
- 1a8:	80 ee       	ldi	r24, 0xE0	; 224
- 1aa:	9b df       	rcall	.-202    	; 0xe2 <twi_tx>
- 1ac:	c1 e5       	ldi	r28, 0x51	; 81
- 1ae:	d1 e0       	ldi	r29, 0x01	; 1
- 1b0:	01 e6       	ldi	r16, 0x61	; 97
- 1b2:	11 e0       	ldi	r17, 0x01	; 1
- 1b4:	fe 01       	movw	r30, r28
- 1b6:	31 97       	sbiw	r30, 0x01	; 1
+ 1b2:	80 ee       	ldi	r24, 0xE0	; 224
+ 1b4:	96 df       	rcall	.-212    	; 0xe2 <twi_tx>
+ 1b6:	e8 01       	movw	r28, r16
+ 1b8:	21 96       	adiw	r28, 0x01	; 1
+ 1ba:	0f 5e       	subi	r16, 0xEF	; 239
+ 1bc:	1f 4f       	sbci	r17, 0xFF	; 255
+ 1be:	fe 01       	movw	r30, r28
+ 1c0:	31 97       	sbiw	r30, 0x01	; 1
 	for (int i = 0; i < 8; i++)
 	{
-		twi_tx(pattern2[i].address);
- 1b8:	80 81       	ld	r24, Z
- 1ba:	93 df       	rcall	.-218    	; 0xe2 <twi_tx>
-		twi_tx(pattern2[i].data);
- 1bc:	88 81       	ld	r24, Y
- 1be:	91 df       	rcall	.-222    	; 0xe2 <twi_tx>
- 1c0:	22 96       	adiw	r28, 0x02	; 2
+		twi_tx(pattern[i].address);
+ 1c2:	80 81       	ld	r24, Z
+ 1c4:	8e df       	rcall	.-228    	; 0xe2 <twi_tx>
+		twi_tx(pattern[i].data |~(0xFF));
+ 1c6:	88 81       	ld	r24, Y
+ 1c8:	8c df       	rcall	.-232    	; 0xe2 <twi_tx>
+ 1ca:	22 96       	adiw	r28, 0x02	; 2
 
-void twi_data2(void)
+void twi_data_inverse(PATTERN_STRUCT pattern[]) //geeft pattern weer (inverted) nog niet getest!
 {
 	twi_start();
 	twi_tx(0xE0);
 	for (int i = 0; i < 8; i++)
- 1c2:	c0 17       	cp	r28, r16
- 1c4:	d1 07       	cpc	r29, r17
- 1c6:	b1 f7       	brne	.-20     	; 0x1b4 <twi_data2+0x16>
+ 1cc:	c0 17       	cp	r28, r16
+ 1ce:	d1 07       	cpc	r29, r17
+ 1d0:	b1 f7       	brne	.-20     	; 0x1be <twi_data_inverse+0x18>
 	{
-		twi_tx(pattern2[i].address);
-		twi_tx(pattern2[i].data);
+		twi_tx(pattern[i].address);
+		twi_tx(pattern[i].data |~(0xFF));
 	}
 	twi_stop();
- 1c8:	88 df       	rcall	.-240    	; 0xda <twi_stop>
+ 1d2:	83 df       	rcall	.-250    	; 0xda <twi_stop>
 }
- 1ca:	df 91       	pop	r29
- 1cc:	cf 91       	pop	r28
- 1ce:	1f 91       	pop	r17
- 1d0:	0f 91       	pop	r16
- 1d2:	08 95       	ret
+ 1d4:	df 91       	pop	r29
+ 1d6:	cf 91       	pop	r28
+ 1d8:	1f 91       	pop	r17
+ 1da:	0f 91       	pop	r16
+ 1dc:	08 95       	ret
 
-000001d4 <twi_data3>:
+000001de <twi_data3>:
 
-void twi_data3()
+void twi_data3() //geeft animatie weer (brainfart pattern)
 {
- 1d4:	cf 93       	push	r28
- 1d6:	df 93       	push	r29
+ 1de:	cf 93       	push	r28
+ 1e0:	df 93       	push	r29
 	twi_start();
- 1d8:	77 df       	rcall	.-274    	; 0xc8 <twi_start>
+ 1e2:	72 df       	rcall	.-284    	; 0xc8 <twi_start>
 	twi_tx(0xE0);
- 1da:	80 ee       	ldi	r24, 0xE0	; 224
- 1dc:	82 df       	rcall	.-252    	; 0xe2 <twi_tx>
+ 1e4:	80 ee       	ldi	r24, 0xE0	; 224
+ 1e6:	7d df       	rcall	.-262    	; 0xe2 <twi_tx>
 
 	for (int i = 0; i < 8; i++)
- 1de:	c0 e0       	ldi	r28, 0x00	; 0
- 1e0:	d0 e0       	ldi	r29, 0x00	; 0
+ 1e8:	c0 e0       	ldi	r28, 0x00	; 0
+ 1ea:	d0 e0       	ldi	r29, 0x00	; 0
 	{
-		twi_tx(pattern3[i + index * 8].address);
- 1e2:	e0 91 70 01 	lds	r30, 0x0170
- 1e6:	f0 91 71 01 	lds	r31, 0x0171
- 1ea:	ee 0f       	add	r30, r30
- 1ec:	ff 1f       	adc	r31, r31
- 1ee:	ee 0f       	add	r30, r30
- 1f0:	ff 1f       	adc	r31, r31
- 1f2:	ee 0f       	add	r30, r30
- 1f4:	ff 1f       	adc	r31, r31
- 1f6:	ec 0f       	add	r30, r28
- 1f8:	fd 1f       	adc	r31, r29
- 1fa:	ee 0f       	add	r30, r30
- 1fc:	ff 1f       	adc	r31, r31
- 1fe:	e0 50       	subi	r30, 0x00	; 0
- 200:	ff 4f       	sbci	r31, 0xFF	; 255
- 202:	80 81       	ld	r24, Z
- 204:	6e df       	rcall	.-292    	; 0xe2 <twi_tx>
-		twi_tx(pattern3[i + index * 8].data);
- 206:	e0 91 70 01 	lds	r30, 0x0170
- 20a:	f0 91 71 01 	lds	r31, 0x0171
- 20e:	ee 0f       	add	r30, r30
- 210:	ff 1f       	adc	r31, r31
- 212:	ee 0f       	add	r30, r30
- 214:	ff 1f       	adc	r31, r31
- 216:	ee 0f       	add	r30, r30
- 218:	ff 1f       	adc	r31, r31
- 21a:	ec 0f       	add	r30, r28
- 21c:	fd 1f       	adc	r31, r29
- 21e:	ee 0f       	add	r30, r30
- 220:	ff 1f       	adc	r31, r31
- 222:	e0 50       	subi	r30, 0x00	; 0
- 224:	ff 4f       	sbci	r31, 0xFF	; 255
- 226:	81 81       	ldd	r24, Z+1	; 0x01
- 228:	5c df       	rcall	.-328    	; 0xe2 <twi_tx>
-void twi_data3()
+		twi_tx(brainfart[i + index * 8].address);
+ 1ec:	e0 91 70 01 	lds	r30, 0x0170
+ 1f0:	f0 91 71 01 	lds	r31, 0x0171
+ 1f4:	ee 0f       	add	r30, r30
+ 1f6:	ff 1f       	adc	r31, r31
+ 1f8:	ee 0f       	add	r30, r30
+ 1fa:	ff 1f       	adc	r31, r31
+ 1fc:	ee 0f       	add	r30, r30
+ 1fe:	ff 1f       	adc	r31, r31
+ 200:	ec 0f       	add	r30, r28
+ 202:	fd 1f       	adc	r31, r29
+ 204:	ee 0f       	add	r30, r30
+ 206:	ff 1f       	adc	r31, r31
+ 208:	e0 50       	subi	r30, 0x00	; 0
+ 20a:	ff 4f       	sbci	r31, 0xFF	; 255
+ 20c:	80 81       	ld	r24, Z
+ 20e:	69 df       	rcall	.-302    	; 0xe2 <twi_tx>
+		twi_tx(brainfart[i + index * 8].data);
+ 210:	e0 91 70 01 	lds	r30, 0x0170
+ 214:	f0 91 71 01 	lds	r31, 0x0171
+ 218:	ee 0f       	add	r30, r30
+ 21a:	ff 1f       	adc	r31, r31
+ 21c:	ee 0f       	add	r30, r30
+ 21e:	ff 1f       	adc	r31, r31
+ 220:	ee 0f       	add	r30, r30
+ 222:	ff 1f       	adc	r31, r31
+ 224:	ec 0f       	add	r30, r28
+ 226:	fd 1f       	adc	r31, r29
+ 228:	ee 0f       	add	r30, r30
+ 22a:	ff 1f       	adc	r31, r31
+ 22c:	e0 50       	subi	r30, 0x00	; 0
+ 22e:	ff 4f       	sbci	r31, 0xFF	; 255
+ 230:	81 81       	ldd	r24, Z+1	; 0x01
+ 232:	57 df       	rcall	.-338    	; 0xe2 <twi_tx>
+void twi_data3() //geeft animatie weer (brainfart pattern)
 {
 	twi_start();
 	twi_tx(0xE0);
 
 	for (int i = 0; i < 8; i++)
- 22a:	21 96       	adiw	r28, 0x01	; 1
- 22c:	c8 30       	cpi	r28, 0x08	; 8
- 22e:	d1 05       	cpc	r29, r1
- 230:	c1 f6       	brne	.-80     	; 0x1e2 <twi_data3+0xe>
+ 234:	21 96       	adiw	r28, 0x01	; 1
+ 236:	c8 30       	cpi	r28, 0x08	; 8
+ 238:	d1 05       	cpc	r29, r1
+ 23a:	c1 f6       	brne	.-80     	; 0x1ec <twi_data3+0xe>
 	{
-		twi_tx(pattern3[i + index * 8].address);
-		twi_tx(pattern3[i + index * 8].data);
+		twi_tx(brainfart[i + index * 8].address);
+		twi_tx(brainfart[i + index * 8].data);
 	}
 	index++;
- 232:	80 91 70 01 	lds	r24, 0x0170
- 236:	90 91 71 01 	lds	r25, 0x0171
- 23a:	01 96       	adiw	r24, 0x01	; 1
+ 23c:	80 91 70 01 	lds	r24, 0x0170
+ 240:	90 91 71 01 	lds	r25, 0x0171
+ 244:	01 96       	adiw	r24, 0x01	; 1
 	if(index > 4)
- 23c:	85 30       	cpi	r24, 0x05	; 5
- 23e:	91 05       	cpc	r25, r1
- 240:	2c f4       	brge	.+10     	; 0x24c <twi_data3+0x78>
+ 246:	85 30       	cpi	r24, 0x05	; 5
+ 248:	91 05       	cpc	r25, r1
+ 24a:	2c f4       	brge	.+10     	; 0x256 <twi_data3+0x78>
 	for (int i = 0; i < 8; i++)
 	{
-		twi_tx(pattern3[i + index * 8].address);
-		twi_tx(pattern3[i + index * 8].data);
+		twi_tx(brainfart[i + index * 8].address);
+		twi_tx(brainfart[i + index * 8].data);
 	}
 	index++;
- 242:	90 93 71 01 	sts	0x0171, r25
- 246:	80 93 70 01 	sts	0x0170, r24
- 24a:	06 c0       	rjmp	.+12     	; 0x258 <twi_data3+0x84>
+ 24c:	90 93 71 01 	sts	0x0171, r25
+ 250:	80 93 70 01 	sts	0x0170, r24
+ 254:	06 c0       	rjmp	.+12     	; 0x262 <twi_data3+0x84>
 	if(index > 4)
 	{
 		index = 3;
- 24c:	83 e0       	ldi	r24, 0x03	; 3
- 24e:	90 e0       	ldi	r25, 0x00	; 0
- 250:	90 93 71 01 	sts	0x0171, r25
- 254:	80 93 70 01 	sts	0x0170, r24
+ 256:	83 e0       	ldi	r24, 0x03	; 3
+ 258:	90 e0       	ldi	r25, 0x00	; 0
+ 25a:	90 93 71 01 	sts	0x0171, r25
+ 25e:	80 93 70 01 	sts	0x0170, r24
 	}
 	twi_stop();
- 258:	40 df       	rcall	.-384    	; 0xda <twi_stop>
+ 262:	3b df       	rcall	.-394    	; 0xda <twi_stop>
 }
- 25a:	df 91       	pop	r29
- 25c:	cf 91       	pop	r28
- 25e:	08 95       	ret
+ 264:	df 91       	pop	r29
+ 266:	cf 91       	pop	r28
+ 268:	08 95       	ret
 
-00000260 <main>:
+0000026a <main>:
 outputs:	
 notes:			Looping forever, trashing the HT16K33
 Version :    	DMK, Initial code
 *******************************************************************/
 {
 	twi_init();		// Init TWI interface
- 260:	4b df       	rcall	.-362    	; 0xf8 <twi_init>
+ 26a:	57 df       	rcall	.-338    	; 0x11a <twi_init>
 
 	twi_start();
- 262:	32 df       	rcall	.-412    	; 0xc8 <twi_start>
+ 26c:	2d df       	rcall	.-422    	; 0xc8 <twi_start>
 	twi_tx(0xE0);
- 264:	80 ee       	ldi	r24, 0xE0	; 224
- 266:	3d df       	rcall	.-390    	; 0xe2 <twi_tx>
+ 26e:	80 ee       	ldi	r24, 0xE0	; 224
+ 270:	38 df       	rcall	.-400    	; 0xe2 <twi_tx>
 	twi_tx(0x00);
- 268:	80 e0       	ldi	r24, 0x00	; 0
- 26a:	3b df       	rcall	.-394    	; 0xe2 <twi_tx>
- 26c:	c0 e1       	ldi	r28, 0x10	; 16
- 26e:	d0 e0       	ldi	r29, 0x00	; 0
+ 272:	80 e0       	ldi	r24, 0x00	; 0
+ 274:	36 df       	rcall	.-404    	; 0xe2 <twi_tx>
+ 276:	c0 e1       	ldi	r28, 0x10	; 16
+ 278:	d0 e0       	ldi	r29, 0x00	; 0
 	for(int i = 0; i < 16; i++)
 	{
 		twi_tx(0x00);
- 270:	80 e0       	ldi	r24, 0x00	; 0
- 272:	37 df       	rcall	.-402    	; 0xe2 <twi_tx>
- 274:	21 97       	sbiw	r28, 0x01	; 1
+ 27a:	80 e0       	ldi	r24, 0x00	; 0
+ 27c:	32 df       	rcall	.-412    	; 0xe2 <twi_tx>
+ 27e:	21 97       	sbiw	r28, 0x01	; 1
 	twi_init();		// Init TWI interface
 
 	twi_start();
 	twi_tx(0xE0);
 	twi_tx(0x00);
 	for(int i = 0; i < 16; i++)
- 276:	e1 f7       	brne	.-8      	; 0x270 <main+0x10>
+ 280:	e1 f7       	brne	.-8      	; 0x27a <main+0x10>
 	{
 		twi_tx(0x00);
 	}
 	twi_stop();
- 278:	30 df       	rcall	.-416    	; 0xda <twi_stop>
-	DDRA = 0x00;
- 27a:	1a ba       	out	0x1a, r1	; 26
+ 282:	2b df       	rcall	.-426    	; 0xda <twi_stop>
+	DDRA = 0x00; //input open on port A
+ 284:	1a ba       	out	0x1a, r1	; 26
 	index = 0;
- 27c:	10 92 71 01 	sts	0x0171, r1
- 280:	10 92 70 01 	sts	0x0170, r1
+ 286:	10 92 71 01 	sts	0x0171, r1
+ 28a:	10 92 70 01 	sts	0x0170, r1
 
 	while (1)
 	{
 		wait(750);
- 284:	8e ee       	ldi	r24, 0xEE	; 238
- 286:	92 e0       	ldi	r25, 0x02	; 2
- 288:	5e df       	rcall	.-324    	; 0x146 <wait>
+ 28e:	8e ee       	ldi	r24, 0xEE	; 238
+ 290:	92 e0       	ldi	r25, 0x02	; 2
+ 292:	32 df       	rcall	.-412    	; 0xf8 <wait>
 		if(PINA & 0x01)
- 28a:	c8 9b       	sbis	0x19, 0	; 25
- 28c:	02 c0       	rjmp	.+4      	; 0x292 <main+0x32>
+ 294:	c8 9b       	sbis	0x19, 0	; 25
+ 296:	04 c0       	rjmp	.+8      	; 0x2a0 <main+0x36>
 		{
-			twi_data2();
- 28e:	87 df       	rcall	.-242    	; 0x19e <twi_data2>
- 290:	f9 cf       	rjmp	.-14     	; 0x284 <main+0x24>
+			twi_data(downey);
+ 298:	80 e5       	ldi	r24, 0x50	; 80
+ 29a:	91 e0       	ldi	r25, 0x01	; 1
+ 29c:	68 df       	rcall	.-304    	; 0x16e <twi_data>
+ 29e:	f7 cf       	rjmp	.-18     	; 0x28e <main+0x24>
 		}
 		else if(PINA & 0x02)
- 292:	c9 9b       	sbis	0x19, 1	; 25
- 294:	02 c0       	rjmp	.+4      	; 0x29a <main+0x3a>
+ 2a0:	c9 9b       	sbis	0x19, 1	; 25
+ 2a2:	02 c0       	rjmp	.+4      	; 0x2a8 <main+0x3e>
 		{
 			twi_data3();
- 296:	9e df       	rcall	.-196    	; 0x1d4 <twi_data3>
- 298:	f5 cf       	rjmp	.-22     	; 0x284 <main+0x24>
+ 2a4:	9c df       	rcall	.-200    	; 0x1de <twi_data3>
+ 2a6:	f3 cf       	rjmp	.-26     	; 0x28e <main+0x24>
+		}
+		else if(PINA & 0x04)
+ 2a8:	ca 9b       	sbis	0x19, 2	; 25
+ 2aa:	04 c0       	rjmp	.+8      	; 0x2b4 <main+0x4a>
+		{
+			twi_data_inverse(smiley);
+ 2ac:	80 e6       	ldi	r24, 0x60	; 96
+ 2ae:	91 e0       	ldi	r25, 0x01	; 1
+ 2b0:	7a df       	rcall	.-268    	; 0x1a6 <twi_data_inverse>
+ 2b2:	ed cf       	rjmp	.-38     	; 0x28e <main+0x24>
 		}
 		else
 		{
-			twi_data();
- 29a:	66 df       	rcall	.-308    	; 0x168 <twi_data>
+			twi_data(smiley);
+ 2b4:	80 e6       	ldi	r24, 0x60	; 96
+ 2b6:	91 e0       	ldi	r25, 0x01	; 1
+ 2b8:	5a df       	rcall	.-332    	; 0x16e <twi_data>
 			index = 0;
- 29c:	10 92 71 01 	sts	0x0171, r1
- 2a0:	10 92 70 01 	sts	0x0170, r1
- 2a4:	ef cf       	rjmp	.-34     	; 0x284 <main+0x24>
+ 2ba:	10 92 71 01 	sts	0x0171, r1
+ 2be:	10 92 70 01 	sts	0x0170, r1
+ 2c2:	e5 cf       	rjmp	.-54     	; 0x28e <main+0x24>
 
-000002a6 <_exit>:
- 2a6:	f8 94       	cli
+000002c4 <_exit>:
+ 2c4:	f8 94       	cli
 
-000002a8 <__stop_program>:
- 2a8:	ff cf       	rjmp	.-2      	; 0x2a8 <__stop_program>
+000002c6 <__stop_program>:
+ 2c6:	ff cf       	rjmp	.-2      	; 0x2c6 <__stop_program>

@@ -9,6 +9,20 @@
  #include <util/delay.h>
  #include "ledmatrix.h"
 
+ /*
+ TWCR:
+ Bit 7 - TWINT: As described above; This is the TWI Interrupt Flag. It is set when the TWI finishes ANY bus operation and has to cleared (by writing a 1 to it) before a new operation can be started.
+ Bit 6 - TWEA: TWI Enable Acknowledge; When the device receives data (as slave or as master), this bit has to be set if the next incoming byte should be ACKed and cleared for a NACK.
+ Bit 5 - TWSTA: TWI Start; When a master has to generate a start condition, write this bit 1 together with TWEN and TWINT. The TWI hardware will generate a start condition and return the appropriate status code.
+ Bit 4 - TWSTO: TWI Stop;
+ Bit 3 - TWWC: TWI Write Collision; Set by the TWI hardware when writing to the TWI Data Register TWDR while TWINT is high.
+ Bit 2 - TWEN: Any bus operation only takes place when TWEN is written to 1 when accessing TWCR.
+ Bit 0 - TWIE: TWI Interrupt Enable;
+ TWDR: TWI Data register
+ TWBR: Bitrate register
+ TWSR: Status register
+ */
+
  void twi_init(void)
 /* 
 short:			Init AVR TWI interface and set bitrate
@@ -18,7 +32,7 @@ notes:			TWI clock is set to 100 kHz
 Version :    	DMK, Initial code
 *******************************************************************/
 {
-	TWSR = 0;
+	TWSR = 0;	 // CPU clock/(16 + 2 * TWBR * (4^TWSR))
 	TWBR = 32;	 // TWI clock set to 100kHz, prescaler = 0
 
 	// Init HT16K22. Page 32 datasheet
@@ -41,6 +55,8 @@ Version :    	DMK, Initial code
 	twi_tx(0xE0);	// Display I2C address + R/W bit
 	twi_tx(0x81);	// Display OFF - Blink On
 	twi_stop();
+
+	wait(1000);
 }
 
 /******************************************************************/
